@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.FixIpActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/user_icon_2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="IP配置"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:text="IP: "
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/et_jz_ip"
+                    android:layout_width="160dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/layout_et_bg"
+                    android:digits="0123456789."
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:text="子网掩码:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/et_jz_ym"
+                    android:layout_width="160dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/layout_et_bg"
+                    android:digits="0123456789."
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:text="" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:text="网关:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/et_jz_wg"
+                    android:layout_width="160dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/layout_et_bg"
+                    android:digits="0123456789."
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:text="" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:text="远程IP:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/et_jz_ycip"
+                    android:layout_width="160dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/layout_et_bg"
+                    android:digits="0123456789."
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:text="" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_style"
+                    android:text="扫描"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+
+                <Button
+                    android:id="@+id/btn_read"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btn_style"
+                    android:text="读取配置"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+
+                <Button
+                    android:id="@+id/btn_fixsave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btn_style"
+                    android:text="配置"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>
