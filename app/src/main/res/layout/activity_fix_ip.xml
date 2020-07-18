@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="IP配置"
+            android:text="IP信息"
             android:textColor="@color/white"
             android:textSize="24sp" />
 

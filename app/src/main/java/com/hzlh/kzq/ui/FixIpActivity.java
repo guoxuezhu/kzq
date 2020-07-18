@@ -103,9 +103,9 @@ public class FixIpActivity extends BaseActivity {
 //            progressDialog.setCanceledOnTouchOutside(false);
 //        }
         Gson gson = new Gson();
-        String sendmsg = gson.toJson(new DeviceInfo(0, "EP_Tool", 0, 48898, "2.0.07e",
-                "Forbidden", "EPort", 1, "0.0.0.0", 0));
-
+//        String sendmsg = gson.toJson(new DeviceInfo(0, "EP_Tool", 0, 48898, "2.0.07e",
+//                "Forbidden", "EPort", 1, "0.0.0.0", 0));
+        String sendmsg = "{\"Zone\":\"EPort\",\"Version\":\"2.0.07e\",\"ConnectMode\":\"Forbidden\",\"Type\":\"EP_Tool\",\"ServAddr\":\"0.0.0.0\",\"ServEn\":1,\"ServPort\":48898,\"PasswordEn\":0,\"ClientEn\":0,\"Agent\":0}";
         ELog.d("======消息======" + sendmsg);
         ClientSend(sendmsg.getBytes());
 //        byte[] msg = new byte[1];
@@ -357,9 +357,7 @@ public class FixIpActivity extends BaseActivity {
         finish();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    private void stopRun() {
         isRun = false;
         if (cUdpSocket != null) {
             cUdpSocket.close();
@@ -370,8 +368,12 @@ public class FixIpActivity extends BaseActivity {
         if (timer2 != null) {
             timer2.cancel();
         }
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopRun();
     }
 }

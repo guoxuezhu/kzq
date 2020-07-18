@@ -1,7 +1,5 @@
 package com.hzlh.kzq.data;
 
-import java.util.ArrayList;
-
 public class SendREQRemain {
 
     private int JCMD;
