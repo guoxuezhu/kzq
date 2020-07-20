@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.FixIpActivity">
-
+    tools:context=".ui.SocketActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="网络信息"
+            android:text="连接信息"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -203,6 +202,5 @@
 
 
     </ScrollView>
-
 
 </LinearLayout>

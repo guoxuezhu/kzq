@@ -81,11 +81,10 @@ public class MainActivity extends BaseActivity implements DeviceAdapter.CallBack
 
     @OnClick(R.id.img_search)
     public void img_search() {
-//        Gson gson = new Gson();
         String sendmsg = "{\"Zone\":\"EPort\",\"Version\":\"2.0.07e\",\"ConnectMode\":\"Forbidden\",\"Type\":\"EP_Tool\",\"ServAddr\":\"0.0.0.0\",\"ServEn\":1,\"ServPort\":48898,\"PasswordEn\":0,\"ClientEn\":0,\"Agent\":0}";
 //        String sendmsg = gson.toJson(new DeviceInfo(0, "EP_Tool", 0, 48898, "2.0.07e",
 //                "Forbidden", "EPort", 1, "0.0.0.0", 0));
-        ELog.d("======消息======" + sendmsg);
+        ELog.d("======发送消息======" + sendmsg);
         ClientSend(sendmsg.getBytes());
     }
 
@@ -132,6 +131,7 @@ public class MainActivity extends BaseActivity implements DeviceAdapter.CallBack
                         DeviceInfo deviceInfo = gson.fromJson(msg, DeviceInfo.class);
                         deviceInfo.setAddressIP(datagramPacket.getAddress().toString().substring(1));
                         ELog.d("=======接收到消息===deviceInfo========" + deviceInfo.toString());
+                        deviceInfos.clear();
                         deviceInfos.add(deviceInfo);
                         mHandler.sendEmptyMessage(1);
                     } catch (IOException e) {
@@ -162,8 +162,9 @@ public class MainActivity extends BaseActivity implements DeviceAdapter.CallBack
 
     private void stopRun() {
         isRun = false;
-        if (cUdpSocket != null) {
+        if (cUdpSocket != null && !cUdpSocket.isClosed()) {
             cUdpSocket.close();
+            cUdpSocket.disconnect();
         }
         if (timer1 != null) {
             timer1.cancel();
