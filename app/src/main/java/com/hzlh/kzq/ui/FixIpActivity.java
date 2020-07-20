@@ -161,8 +161,6 @@ public class FixIpActivity extends BaseActivity {
                 while (isRun) {
                     try {
                         cUdpSocket.receive(datagramPacket);
-                        ELog.d("=======接收到==IP==消息===========" + datagramPacket.getAddress().toString().substring(1));
-                        ELog.d("=======接收到消息长度===========" + datagramPacket.getLength());
                         String msg = new String(buf, 0, datagramPacket.getLength());
                         ELog.d("=======接收到消息===========" + msg);
                         JSONObject json = new JSONObject(msg);

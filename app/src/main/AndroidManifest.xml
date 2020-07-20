@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SocketActivity"></activity>
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +29,9 @@
             android:name="UMENG_CHANNEL"
             android:value="Channel ID" />
 
+        <activity
+            android:name=".ui.SocketActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="stateHidden" />
