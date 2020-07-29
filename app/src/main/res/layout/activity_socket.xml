@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/user_icon_2">
+        android:background="@color/link_text_light">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
             android:layout_centerInParent="true"
             android:text="连接信息"
             android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:textSize="22sp" />
 
     </RelativeLayout>
 
@@ -40,21 +40,20 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="95dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:text="IP: "
+                    android:text="连接名称: "
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/et_jz_ip"
+                <TextView
+                    android:id="@+id/tv_socket_name"
                     android:layout_width="160dp"
                     android:layout_height="42dp"
                     android:background="@drawable/layout_et_bg"
-                    android:digits="0123456789."
-                    android:inputType="number"
                     android:paddingLeft="10dp"
-                    android:text=""
+                    android:gravity="center_vertical"
+                    android:text="ddd"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -66,20 +65,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="95dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:text="子网掩码:"
+                    android:text="服务器IP:"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/et_jz_ym"
+                    android:id="@+id/et_s_ip"
                     android:layout_width="160dp"
                     android:layout_height="42dp"
                     android:background="@drawable/layout_et_bg"
                     android:digits="0123456789."
                     android:inputType="number"
                     android:paddingLeft="10dp"
+                    android:textSize="20sp"
                     android:text="" />
 
 
@@ -92,20 +92,20 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="95dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:text="网关:"
+                    android:text="服务器端口:"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/et_jz_wg"
+                    android:id="@+id/et_s_port"
                     android:layout_width="160dp"
                     android:layout_height="42dp"
                     android:background="@drawable/layout_et_bg"
-                    android:digits="0123456789."
                     android:inputType="number"
                     android:paddingLeft="10dp"
+                    android:textSize="20sp"
                     android:text="" />
 
 
@@ -118,66 +118,24 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="95dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:text="DNS:"
+                    android:text="本地端口:"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/et_jz_dns"
+                    android:id="@+id/et_c_port"
                     android:layout_width="160dp"
                     android:layout_height="42dp"
                     android:background="@drawable/layout_et_bg"
-                    android:digits="0123456789."
                     android:inputType="number"
                     android:paddingLeft="10dp"
+                    android:textSize="20sp"
                     android:text="" />
 
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:text="DHCP:"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <RadioGroup
-                    android:layout_width="160dp"
-                    android:layout_height="42dp"
-                    android:background="@drawable/layout_et_bg"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rbtn_dhcp_ok"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="动态"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <RadioButton
-                        android:id="@+id/rbtn_dhcp_no"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="静态"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                </RadioGroup>
-
-            </LinearLayout>
-
 
 
             <LinearLayout

@@ -3,6 +3,8 @@ package com.hzlh.kzq.ui;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,11 +26,20 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SocketActivity extends BaseActivity {
 
+    @BindView(R.id.tv_socket_name)
+    TextView tv_socket_name;
+    @BindView(R.id.et_s_ip)
+    EditText et_s_ip;
+    @BindView(R.id.et_s_port)
+    EditText et_s_port;
+    @BindView(R.id.et_c_port)
+    EditText et_c_port;
 
     Handler sHandler = new Handler() {
         @Override
@@ -74,7 +85,12 @@ public class SocketActivity extends BaseActivity {
     }
 
     private void initView() {
-
+        if (sockInfos.size() != 0) {
+            tv_socket_name.setText(sockInfos.get(0).getName());
+            et_s_ip.setText(sockInfos.get(0).getServer());
+            et_s_port.setText(sockInfos.get(0).getServerPort() + "");
+            et_c_port.setText(sockInfos.get(0).getLocalPort() + "");
+        }
     }
 
 
@@ -98,6 +114,19 @@ public class SocketActivity extends BaseActivity {
 
     @OnClick(R.id.btn_socksave)
     public void btn_socksave() {
+
+
+        SockInfo sockInfo = sockInfos.get(0);
+        sockInfo.setServer(et_s_ip.getText().toString().trim());
+        sockInfo.setServerPort(Integer.valueOf(et_s_port.getText().toString().trim()));
+        sockInfo.setLocalPort(Integer.valueOf(et_c_port.getText().toString().trim()));
+
+        Gson gson = new Gson();
+        String sockInfojson = gson.toJson(sockInfo);
+        String sendmsg = "{\"PL\":{\"SOCK\":" + sockInfojson + "},\"JCMD\":1,\"CID\":10005}";
+        ELog.d("======发送消息======" + sendmsg);
+        ClientSend(sendmsg.getBytes());
+
 
     }
 
