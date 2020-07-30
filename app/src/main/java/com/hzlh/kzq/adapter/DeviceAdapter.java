@@ -42,8 +42,8 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
     public void onBindViewHolder(@NonNull DeviceViewHolder holder, int position) {
         DeviceInfo deviceInfo = datas.get(position);
         holder.tv_number.setText(position + 1 + "");
-        holder.tv_mac.setText(deviceInfo.getMAC());
-        holder.tv_ip.setText(deviceInfo.getAddressIP() + "");
+        holder.tv_mac.setText("MAC地址:" + deviceInfo.getMAC());
+        holder.tv_ip.setText("IP地址:" + deviceInfo.getAddressIP());
         holder.setItem(deviceInfo);
     }
 
