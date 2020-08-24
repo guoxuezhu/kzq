@@ -156,7 +156,8 @@ public class MainActivity extends BaseActivity implements DeviceAdapter.CallBack
     @Override
     public void onClickItemTcp(DeviceInfo item) {
         stopRun();
-        startActivity(new Intent(this, SocketActivity.class));
+//        startActivity(new Intent(this, SocketActivity.class));
+        startActivity(new Intent(this, DeviceActivity.class));
     }
 
     private void stopRun() {

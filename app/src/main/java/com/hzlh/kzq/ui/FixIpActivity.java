@@ -132,7 +132,9 @@ public class FixIpActivity extends BaseActivity {
     }
 
     private void ClientSend(final byte[] msgbyte) {
-        timer1 = new Timer();
+        if (timer1 == null) {
+            timer1 = new Timer();
+        }
         timer1.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -149,8 +151,9 @@ public class FixIpActivity extends BaseActivity {
 
 
     private void getMsg() {
-
-        timer2 = new Timer();
+        if (timer2 == null) {
+            timer2 = new Timer();
+        }
         timer2.schedule(new TimerTask() {
             @Override
             public void run() {

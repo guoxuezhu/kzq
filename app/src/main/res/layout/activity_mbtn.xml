@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.DeviceActivity">
+    tools:context=".ui.MbtnActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +22,6 @@
 
     </RelativeLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,34 +35,33 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_fixIP"
+                android:id="@+id/btn_mbcl_0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_style"
-                android:text="网络设置"
+                android:text="窗帘开"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/btn_socket"
+                android:id="@+id/btn_mbcl_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/btn_style"
-                android:text="连接设置"
+                android:text="窗帘关"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/btn_mb"
+                android:id="@+id/btn_mbcl_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/btn_style"
-                android:text="设备控制"
+                android:text="窗帘停"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
-
 
         </LinearLayout>
 
@@ -75,27 +73,37 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_ruwang"
+                android:id="@+id/btn_mb_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_style"
-                android:text="设备入网"
+                android:text="讲台灯"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/btn_bind"
+                android:id="@+id/btn_mb_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/btn_style"
-                android:text="绑定设备"
+                android:text="场景"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+
+            <Button
+                android:id="@+id/btn_mb_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/btn_style"
+                android:text="黑板灯"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

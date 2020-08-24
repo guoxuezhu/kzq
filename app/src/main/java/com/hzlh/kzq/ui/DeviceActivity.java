@@ -1,26 +1,21 @@
 package com.hzlh.kzq.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.hzlh.kzq.R;
-import com.hzlh.kzq.data.SYSconfig;
 import com.hzlh.kzq.utils.ELog;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.DatagramPacket;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DeviceActivity extends BaseActivity {
 
@@ -35,8 +30,28 @@ public class DeviceActivity extends BaseActivity {
         ButterKnife.bind(this);
 
 
-        initView();
     }
+
+    @OnClick(R.id.btn_mb)
+    public void btn_mb() {
+        startActivity(new Intent(this, MbtnActivity.class));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void initView() {
 
