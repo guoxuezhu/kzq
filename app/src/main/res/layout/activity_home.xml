@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.HomeActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="网关IP:"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_wg_ip"
+            android:layout_width="160dp"
+            android:layout_height="42dp"
+            android:background="@drawable/layout_et_bg"
+            android:digits="0123456789."
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:text="192.168.0.26"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cl"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_style"
+            android:text="窗帘"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_hbd"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/btn_style"
+            android:text="黑板灯"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_jsd"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_style"
+            android:text="教室灯"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_cj"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/btn_style"
+            android:text="场景"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:background="@drawable/checked_status"
+            android:button="@null"
+            android:gravity="center"
+            android:text="教室灯"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+<!--        <CheckBox-->
+<!--            android:id="@+id/jingyin"-->
+<!--            android:layout_width="@dimen/yinpin_btn_height"-->
+<!--            android:layout_height="@dimen/yinpin_btn_height"-->
+<!--            android:layout_marginLeft="@dimen/yinpin_btn_marginLeft"-->
+<!--            android:background="@drawable/checked_status"-->
+<!--            android:button="@null"-->
+<!--            android:drawableTop="@drawable/jingyin"-->
+<!--            android:drawablePadding="0dp"-->
+<!--            android:gravity="center"-->
+<!--            android:paddingTop="@dimen/dp_10"-->
+<!--            android:text="静音"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/text_size_20" />-->
+    </LinearLayout>
+
+</LinearLayout>
