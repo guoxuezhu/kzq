@@ -1,9 +1,8 @@
 package com.hzlh.kzq.ui;
 
 import android.os.Bundle;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.hzlh.kzq.R;
 import com.hzlh.kzq.utils.ELog;
@@ -18,7 +17,7 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import butterknife.OnCheckedChanged;
 
 public class HomeActivity extends BaseActivity {
 
@@ -45,28 +44,50 @@ public class HomeActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.btn_cl)
-    public void btn_cl() {
-        byte[] msgbyte = StringToBytes("4C4801A9010000000100010A0D");
-        ClientSend(msgbyte);
-//        ELog.d("======发送消息======" + sendmsg);
+    @OnCheckedChanged(R.id.btn_cl)
+    public void btn_cl(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            ClientSend(StringToBytes("4C4801A9010000000100010A0D"));
+        } else {
+            ClientSend(StringToBytes("4C4801A9010000000100020A0D"));
+        }
     }
 
-    @OnClick(R.id.btn_hbd)
-    public void btn_hbd() {
-        byte[] msgbyte = StringToBytes("4C4801A9010000000100020A0D");
-        ClientSend(msgbyte);
+    @OnCheckedChanged(R.id.btn_hbd)
+    public void btn_hbd(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            ClientSend(StringToBytes("4C4801A9010000000100030A0D"));
+        } else {
+            ClientSend(StringToBytes("4C4801A9010000000100040A0D"));
+        }
     }
 
 
-    @OnClick(R.id.btn_jsd)
-    public void btn_jsd() {
-
+    @OnCheckedChanged(R.id.btn_jsd)
+    public void btn_jsd(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            ClientSend(StringToBytes("4C4801A9010000000100050A0D"));
+        } else {
+            ClientSend(StringToBytes("4C4801A9010000000100060A0D"));
+        }
     }
 
-    @OnClick(R.id.btn_cj)
-    public void btn_cj() {
+//    @OnCheckedChanged(R.id.checkbox_jsd)
+//    public void checkbox_jsd(CompoundButton buttonView, boolean isChecked) {
+//        if (isChecked) {
+//            ELog.d("======isChecked===11===" + isChecked);
+//        } else {
+//            ELog.d("======isChecked===22===" + isChecked);
+//        }
+//    }
 
+    @OnCheckedChanged(R.id.btn_cj)
+    public void btn_cj(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            ClientSend(StringToBytes("4C4801A9010000000100070A0D"));
+        } else {
+            ClientSend(StringToBytes("4C4801A9010000000100080A0D"));
+        }
     }
 
 

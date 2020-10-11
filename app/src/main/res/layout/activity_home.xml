@@ -30,7 +30,7 @@
             android:digits="0123456789."
             android:inputType="number"
             android:paddingLeft="10dp"
-            android:text="192.168.0.26"
+            android:text="192.168.0.220"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -43,21 +43,25 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <CheckBox
             android:id="@+id/btn_cl"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="40dp"
-            android:background="@drawable/btn_style"
+            android:background="@drawable/checked_status"
+            android:button="@null"
+            android:gravity="center"
             android:text="窗帘"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <Button
+        <CheckBox
             android:id="@+id/btn_hbd"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/btn_style"
+            android:background="@drawable/checked_status"
+            android:button="@null"
+            android:gravity="center"
             android:text="黑板灯"
             android:textColor="@color/white"
             android:textSize="18sp" />
@@ -71,37 +75,9 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_jsd"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:background="@drawable/btn_style"
-            android:text="教室灯"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/btn_cj"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/btn_style"
-            android:text="场景"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
         <CheckBox
-            android:layout_width="140dp"
+            android:id="@+id/btn_jsd"
+            android:layout_width="100dp"
             android:layout_height="40dp"
             android:background="@drawable/checked_status"
             android:button="@null"
@@ -109,6 +85,39 @@
             android:text="教室灯"
             android:textColor="@color/white"
             android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/btn_cj"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/checked_status"
+            android:button="@null"
+            android:gravity="center"
+            android:text="场景"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <CheckBox-->
+<!--            android:id="@+id/checkbox_jsd"-->
+<!--            android:layout_width="140dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:background="@drawable/checked_status"-->
+<!--            android:button="@null"-->
+<!--            android:gravity="center"-->
+<!--            android:text="教室灯"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="18sp" />-->
 
 <!--        <CheckBox-->
 <!--            android:id="@+id/jingyin"-->
@@ -124,6 +133,6 @@
 <!--            android:text="静音"-->
 <!--            android:textColor="@color/white"-->
 <!--            android:textSize="@dimen/text_size_20" />-->
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </LinearLayout>

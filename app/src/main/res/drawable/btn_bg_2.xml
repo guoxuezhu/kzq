@@ -8,9 +8,9 @@
     <!-- 渐变色 -->
     <gradient
         android:angle="270"
-        android:startColor="@color/btn_2"
+        android:startColor="@color/link_text_dark"
         android:centerColor="@color/btn_5"
-        android:endColor="@color/btn_8">
+        android:endColor="@color/link_text_dark">
     </gradient>
 
 </shape>
