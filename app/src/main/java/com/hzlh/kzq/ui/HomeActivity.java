@@ -26,8 +26,8 @@ public class HomeActivity extends BaseActivity {
 
 
     private DatagramSocket cUdpSocket;
-    private Timer timer1, timer2;
-    private boolean isRun = false;
+    private Timer timer1;
+//    private boolean isRun = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class HomeActivity extends BaseActivity {
 
         try {
             cUdpSocket = new DatagramSocket(10101);
-            isRun = true;
+//            isRun = true;
         } catch (SocketException e) {
             e.printStackTrace();
         }
@@ -127,10 +127,24 @@ public class HomeActivity extends BaseActivity {
         }, 1);
     }
 
+    private void stopRun() {
+//        isRun = false;
+        if (cUdpSocket != null && !cUdpSocket.isClosed()) {
+            cUdpSocket.close();
+            cUdpSocket.disconnect();
+        }
+        if (timer1 != null) {
+            timer1.cancel();
+        }
+//        if (timer2 != null) {
+//            timer2.cancel();
+//        }
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopRun();
     }
 
 

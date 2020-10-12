@@ -3,14 +3,14 @@
     android:shape="rectangle">
 
     <!-- 设置圆角矩形 -->
-    <corners android:radius="2dp" />
+    <corners android:radius="6dp" />
 
     <!-- 渐变色 -->
     <gradient
         android:angle="270"
-        android:startColor="@color/link_text_dark"
+        android:startColor="@color/btn_4"
         android:centerColor="@color/btn_5"
-        android:endColor="@color/link_text_dark">
+        android:endColor="@color/btn_4">
     </gradient>
 
 </shape>
