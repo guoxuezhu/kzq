@@ -15,11 +15,29 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    signingConfigs {
+        release {
+            storeFile file('/home/guoxuezhu/workspace/lhwork/kzq/key/lhkzq.jks')
+            storePassword 'kzqlihong'
+            keyAlias 'lhkzq'
+            keyPassword 'lihongkzq'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField 'boolean', 'JAVA_LOG_ENABLED', 'false'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            buildConfigField 'boolean', 'JAVA_LOG_ENABLED', 'true'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "kzq-${variant.name}-${variant.versionName}.apk"
         }
     }
     compileOptions {
@@ -36,4 +54,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation "com.jakewharton:butterknife:10.2.3"
+    annotationProcessor "com.jakewharton:butterknife-compiler:10.2.3"
 }
