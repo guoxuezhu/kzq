@@ -28,7 +28,7 @@ public class UDPUtil {
         if (hex.length() == 1) {
             hex = "0" + hex;
         }
-        sendUdpMsg("wg_ip", StringToBytes("4C4801A9010000000100" + hex + "0A0D"));
+        sendUdpMsg("192.168.0.226", StringToBytes("4C4801A9010000000100" + hex + "0A0D"));
     }
 
     private static byte[] StringToBytes(String str) {
@@ -81,7 +81,10 @@ public class UDPUtil {
                             }
                             ret += hex.toUpperCase();
                         }
-                        ELog.i("=======接收数据包===ret=====" + ret);
+                        ELog.i("=======接收数据包===ret==111===" + ret);
+                        ELog.i("=======接收数据包===ret==222===" + ret.length());
+                        ELog.i("=======接收数据包===ret==333===" + recePacket.getAddress().toString().substring(1));
+                        ELog.i("=======接收数据包===ret==444===" + recePacket.getLength());
 //                        WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
 //                        List<WuangguanInfo> wgData = wangguandata.queryBuilder()
 //                                .where(WuangguanInfoDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)),
