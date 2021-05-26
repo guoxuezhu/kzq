@@ -1,12 +1,20 @@
 package com.hzlh.kzq.utils;
 
+import android.os.Handler;
+
+import com.hzlh.kzq.MyApplication;
+import com.hzlh.kzq.data.DbDao.WgDatasDao;
+import com.hzlh.kzq.data.model.WgDatas;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
+import java.util.List;
 
 public class UDPUtil {
 
     private static DatagramSocket udpSocket;
+    private static Handler mhandler;
 
     private static void init() {
         try {
@@ -83,8 +91,24 @@ public class UDPUtil {
                         }
                         ELog.i("=======接收数据包===ret==111===" + ret);
                         ELog.i("=======接收数据包===ret==222===" + ret.length());
-                        ELog.i("=======接收数据包===ret==333===" + recePacket.getAddress().toString().substring(1));
-                        ELog.i("=======接收数据包===ret==444===" + recePacket.getLength());
+                        ELog.i("=======接收数据包===ip=====" + recePacket.getAddress().toString().substring(1));
+                        ELog.i("=======接收数据包===getLength=====" + recePacket.getLength());
+                        WgDatasDao wgDatasDao = MyApplication.getDaoSession().getWgDatasDao();
+                        List<WgDatas> wgDatas = wgDatasDao.queryBuilder()
+                                .where(WgDatasDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)))
+                                .list();
+                        if (wgDatas.size() != 0) {
+                            WgDatas wgData = wgDatas.get(0);
+                            wgData.setWg_status(1);
+                            wgDatasDao.update(wgData);
+                        } else {
+                            wgDatasDao.insert(new WgDatas(null, recePacket.getAddress().toString().substring(1), "网关", "", 1));
+                        }
+                        if (mhandler != null) {
+                            mhandler.sendEmptyMessage(1001);
+                        }
+
+
 //                        WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
 //                        List<WuangguanInfo> wgData = wangguandata.queryBuilder()
 //                                .where(WuangguanInfoDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)),
@@ -108,4 +132,7 @@ public class UDPUtil {
         }.start();
     }
 
+    public static void setMainHandler(Handler handler) {
+        mhandler = handler;
+    }
 }
