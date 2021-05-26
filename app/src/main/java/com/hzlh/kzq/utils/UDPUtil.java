@@ -3,7 +3,9 @@ package com.hzlh.kzq.utils;
 import android.os.Handler;
 
 import com.hzlh.kzq.MyApplication;
+import com.hzlh.kzq.data.DbDao.DevicesDataDao;
 import com.hzlh.kzq.data.DbDao.WgDatasDao;
+import com.hzlh.kzq.data.model.DevicesData;
 import com.hzlh.kzq.data.model.WgDatas;
 
 import java.net.DatagramPacket;
@@ -14,7 +16,8 @@ import java.util.List;
 public class UDPUtil {
 
     private static DatagramSocket udpSocket;
-    private static Handler mhandler;
+    private static Handler mhandler, deviceHandler;
+    private static boolean isRun = false;
 
     private static void init() {
         try {
@@ -23,6 +26,16 @@ public class UDPUtil {
             udpSocket = null;
             e.printStackTrace();
         }
+    }
+
+    public static void sendMsg(String wg_ip, String ml) {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                sendUdpMsg(wg_ip, StringToBytes(ml));
+            }
+        }.start();
     }
 
     public static void doWangguan(String ml) {
@@ -62,8 +75,11 @@ public class UDPUtil {
             DatagramPacket dp = new DatagramPacket(msgbyte, msgbyte.length);
             dp.setSocketAddress(new InetSocketAddress(ip, 10101));
             udpSocket.send(dp);//发送一条广播信息
+            ELog.i("=======发送一条广播信息========");
         } catch (Exception e) {
             udpSocket = null;
+            isRun = false;
+            ELog.i("=======发送一条广播信息===Exception=====");
             e.printStackTrace();
         }
     }
@@ -71,12 +87,13 @@ public class UDPUtil {
     public static void startReadUdpMsg() {
         if (udpSocket == null) {
             init();
+            isRun = true;
         }
         new Thread() {
             @Override
             public void run() {
                 super.run();
-                while (true) {
+                while (isRun) {
                     byte[] receBuf = new byte[1024];
                     try {
                         DatagramPacket recePacket = new DatagramPacket(receBuf, receBuf.length);
@@ -90,40 +107,41 @@ public class UDPUtil {
                             ret += hex.toUpperCase();
                         }
                         ELog.i("=======接收数据包===ret==111===" + ret);
-                        ELog.i("=======接收数据包===ret==222===" + ret.length());
-                        ELog.i("=======接收数据包===ip=====" + recePacket.getAddress().toString().substring(1));
-                        ELog.i("=======接收数据包===getLength=====" + recePacket.getLength());
-                        WgDatasDao wgDatasDao = MyApplication.getDaoSession().getWgDatasDao();
-                        List<WgDatas> wgDatas = wgDatasDao.queryBuilder()
-                                .where(WgDatasDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)))
-                                .list();
-                        if (wgDatas.size() != 0) {
-                            WgDatas wgData = wgDatas.get(0);
-                            wgData.setWg_status(1);
-                            wgDatasDao.update(wgData);
-                        } else {
-                            wgDatasDao.insert(new WgDatas(null, recePacket.getAddress().toString().substring(1), "网关", "", 1));
-                        }
-                        if (mhandler != null) {
+                        String msgType = Integer.toHexString(recePacket.getData()[3] & 0xFF);
+                        ELog.i("=======接收数据包===msgType=====" + msgType);
+                        if (mhandler != null && msgType.equals("a0")) {
+                            WgDatasDao wgDatasDao = MyApplication.getDaoSession().getWgDatasDao();
+                            List<WgDatas> wgDatas = wgDatasDao.queryBuilder()
+                                    .where(WgDatasDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)))
+                                    .list();
+                            if (wgDatas.size() != 0) {
+                                WgDatas wgData = wgDatas.get(0);
+                                wgData.setWg_status(1);
+                                wgDatasDao.update(wgData);
+                            } else {
+                                wgDatasDao.insert(new WgDatas(null, recePacket.getAddress().toString().substring(1), "网关", "", 1));
+                            }
                             mhandler.sendEmptyMessage(1001);
                         }
 
-
-//                        WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
-//                        List<WuangguanInfo> wgData = wangguandata.queryBuilder()
-//                                .where(WuangguanInfoDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)),
-//                                        WuangguanInfoDao.Properties.Wg_status.eq(1))
-//                                .list();
-//                        if (wgData.size() != 0 && recePacket.getLength() == 22) {
-//                            // CC0101 AC 4C48FFAC6802000000 05 0400 02 01 01 0A0DCD
-//                            ELog.i("=====接收数据包====ret===1===" + ret.substring(6, 8));
-//                            ELog.i("=====接收数据包====ret===2===" + ret.substring(34, 36));
-//                            ELog.i("=====接收数据包====ret===3===" + ret.substring(36, 38));
-//                            if (ret.substring(6, 8).equals("AC")) {
-//                                String wgbtnStatus = "WGBTN;" + ret.substring(34, 36) + ";" + ret.substring(36, 38);
-//                                SerialPortUtil.sendMsg1(wgbtnStatus.getBytes());
-//                            }
-//                        }
+                        if (deviceHandler != null && msgType.equals("a2")) {
+                            String device_numer = Integer.toHexString(recePacket.getData()[14] & 0xFF);
+                            ELog.i("=======接收数据包===device_numer=====" + device_numer);
+                            DevicesDataDao devicesDataDao = MyApplication.getDaoSession().getDevicesDataDao();
+                            devicesDataDao.deleteAll();
+                            int count = Integer.valueOf(device_numer);
+                            for (int i = 0; i < count; i++) {
+                                String device_type = Integer.toHexString(recePacket.getData()[i * 66 + 15] & 0xFF);
+                                String device_id = Integer.toHexString(recePacket.getData()[i * 66 + 17] & 0xFF);
+                                ELog.i("=======接收数据包===device_type==111===" + device_type);
+                                ELog.i("=======接收数据包===device_id===222====" + device_id);
+                                devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
+                                        "", "", "", "", "", "", "", ""
+                                ));
+                            }
+                            ELog.i("=======接收数据包===devicesDataDao=====" + devicesDataDao.loadAll().toString());
+                            deviceHandler.sendEmptyMessage(1002);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -134,5 +152,25 @@ public class UDPUtil {
 
     public static void setMainHandler(Handler handler) {
         mhandler = handler;
+    }
+
+    public static void closeMainHandler() {
+        mhandler = null;
+    }
+
+    public static void setDeviceHandler(Handler handler) {
+        deviceHandler = handler;
+    }
+
+    public static void closeDeviceHandler() {
+        deviceHandler = null;
+    }
+
+    public static void stopReadMsg() {
+        isRun = false;
+        if (udpSocket != null) {
+            udpSocket.close();
+            udpSocket = null;
+        }
     }
 }

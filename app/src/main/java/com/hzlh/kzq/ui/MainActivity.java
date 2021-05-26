@@ -1,9 +1,9 @@
 package com.hzlh.kzq.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +13,8 @@ import com.hzlh.kzq.MyApplication;
 import com.hzlh.kzq.R;
 import com.hzlh.kzq.adapter.WgAdapter;
 import com.hzlh.kzq.data.DbDao.WgDatasDao;
+import com.hzlh.kzq.data.model.WgDatas;
+import com.hzlh.kzq.utils.ELog;
 import com.hzlh.kzq.utils.UDPUtil;
 
 import butterknife.BindView;
@@ -45,7 +47,6 @@ public class MainActivity extends BaseActivity implements WgAdapter.CallBack {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-//        UDPUtil.doWangguan("4C4800A20000000000000A0D");
         wgDatasDao = MyApplication.getDaoSession().getWgDatasDao();
         initRecyclerView();
         UDPUtil.setMainHandler(mHandler);
@@ -58,14 +59,23 @@ public class MainActivity extends BaseActivity implements WgAdapter.CallBack {
         wg_recyclerView.setAdapter(wgAdapter);
     }
 
+    @Override
+    public void onClickWgItem(WgDatas wgDatas) {
+        UDPUtil.closeMainHandler();
+        mHandler = null;
+        ELog.i("=========onClickWgItem======" + wgDatas.toString());
+        Intent intent = new Intent(this, DevicesActivity.class);
+        intent.putExtra("wg_ip", wgDatas.wg_ip);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.btn_lianjie)
     public void btn_lianjie() {
-//        startActivity(new Intent(this, DevicesActivity.class));
-//        finish();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        UDPUtil.stopReadMsg();
     }
 }

@@ -16,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class WgAdapter extends RecyclerView.Adapter<WgAdapter.WgViewHolder> {
 
@@ -39,7 +40,7 @@ public class WgAdapter extends RecyclerView.Adapter<WgAdapter.WgViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull WgViewHolder holder, int position) {
         WgDatas wgData = datas.get(position);
-        holder.tv_wg_serialNumber.setText(position + "");
+        holder.tv_wg_serialNumber.setText((position + 1) + "");
         holder.tv_wg_ip.setText(wgData.wg_ip);
         if (wgData.wg_status == 1) {
             holder.tv_status.setText("在线");
@@ -62,6 +63,7 @@ public class WgAdapter extends RecyclerView.Adapter<WgAdapter.WgViewHolder> {
     }
 
     public interface CallBack {
+        void onClickWgItem(WgDatas wgDatas);
     }
 
     public class WgViewHolder extends RecyclerView.ViewHolder {
@@ -84,6 +86,10 @@ public class WgAdapter extends RecyclerView.Adapter<WgAdapter.WgViewHolder> {
             item = wgData;
         }
 
+        @OnClick(R.id.tv_wg_ip)
+        public void tv_wg_ip() {
+            mCallBack.onClickWgItem(item);
+        }
 
     }
 }
