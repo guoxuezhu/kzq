@@ -38,7 +38,6 @@ public class MainActivity extends BaseActivity implements WgAdapter.CallBack {
                     wgAdapter.setDatas(wgDatasDao.loadAll());
                     break;
             }
-
         }
     };
 
@@ -48,6 +47,12 @@ public class MainActivity extends BaseActivity implements WgAdapter.CallBack {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         wgDatasDao = MyApplication.getDaoSession().getWgDatasDao();
+//        wgDatasDao.deleteAll();
+        for (int i = 0; i < wgDatasDao.loadAll().size(); i++) {
+            WgDatas wgData = wgDatasDao.loadAll().get(i);
+            wgData.setWg_status(0);
+            wgDatasDao.update(wgData);
+        }
         initRecyclerView();
         UDPUtil.setMainHandler(mHandler);
     }
@@ -62,7 +67,6 @@ public class MainActivity extends BaseActivity implements WgAdapter.CallBack {
     @Override
     public void onClickWgItem(WgDatas wgDatas) {
         UDPUtil.closeMainHandler();
-        mHandler = null;
         ELog.i("=========onClickWgItem======" + wgDatas.toString());
         Intent intent = new Intent(this, DevicesActivity.class);
         intent.putExtra("wg_ip", wgDatas.wg_ip);
@@ -74,8 +78,22 @@ public class MainActivity extends BaseActivity implements WgAdapter.CallBack {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        UDPUtil.stopReadMsg();
+        mHandler = null;
+        UDPUtil.closeMainHandler();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        UDPUtil.stopReadMsg();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        ELog.i("======MainActivity===onRestart======");
+        UDPUtil.setMainHandler(mHandler);
     }
 }

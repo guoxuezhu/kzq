@@ -63,4 +63,11 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
     public void onClickDeviceItem(DevicesData devicesData) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        UDPUtil.closeDeviceHandler();
+        deviceHandler = null;
+    }
 }

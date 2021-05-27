@@ -8,6 +8,9 @@ import com.hzlh.kzq.data.DbDao.WgDatasDao;
 import com.hzlh.kzq.data.model.DevicesData;
 import com.hzlh.kzq.data.model.WgDatas;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
@@ -22,6 +25,7 @@ public class UDPUtil {
     private static void init() {
         try {
             udpSocket = new DatagramSocket(12001);
+            isRun = true;
         } catch (Exception e) {
             udpSocket = null;
             e.printStackTrace();
@@ -77,8 +81,8 @@ public class UDPUtil {
             udpSocket.send(dp);//发送一条广播信息
             ELog.i("=======发送一条广播信息========");
         } catch (Exception e) {
-            udpSocket = null;
-            isRun = false;
+//            udpSocket = null;
+//            isRun = false;
             ELog.i("=======发送一条广播信息===Exception=====");
             e.printStackTrace();
         }
@@ -87,7 +91,6 @@ public class UDPUtil {
     public static void startReadUdpMsg() {
         if (udpSocket == null) {
             init();
-            isRun = true;
         }
         new Thread() {
             @Override
@@ -135,9 +138,30 @@ public class UDPUtil {
                                 String device_id = Integer.toHexString(recePacket.getData()[i * 66 + 17] & 0xFF);
                                 ELog.i("=======接收数据包===device_type==111===" + device_type);
                                 ELog.i("=======接收数据包===device_id===222====" + device_id);
-                                devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
-                                        "", "", "", "", "", "", "", ""
-                                ));
+                                if (device_type.equals("2")) {
+                                    byte[] buffer2 = new byte[4];
+                                    String[] strArray = new String[8];
+                                    String value1 = Integer.toHexString(recePacket.getData()[i * 66 + 52] & 0xFF);
+                                    strArray[0] = value1;
+                                    for (int n = 0; n < 7; n++) {
+                                        System.arraycopy(recePacket.getData(), i * 66 + 53 + n * 4, buffer2, 0, 4);
+                                        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buffer2);
+                                        DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
+                                        try {
+                                            float value = dataInputStream.readFloat();
+                                            ELog.i("=======接收数据包===float=====value=======" + value);
+                                            strArray[1 + n] = value + "";
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
+                                            strArray[0], strArray[1], strArray[2], strArray[3], strArray[4], strArray[5], strArray[6], strArray[7]));
+                                } else {
+                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
+                                            "", "", "", "", "", "", "", ""));
+                                }
+
                             }
                             ELog.i("=======接收数据包===devicesDataDao=====" + devicesDataDao.loadAll().toString());
                             deviceHandler.sendEmptyMessage(1002);
