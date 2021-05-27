@@ -103,15 +103,15 @@ public class UDPUtil {
                     try {
                         DatagramPacket recePacket = new DatagramPacket(receBuf, receBuf.length);
                         udpSocket.receive(recePacket);
-                        String ret = "";
-                        for (int j = 0; j < recePacket.getLength(); j++) {
-                            String hex = Integer.toHexString(recePacket.getData()[j] & 0xFF);
-                            if (hex.length() == 1) {
-                                hex = "0" + hex;
-                            }
-                            ret += hex.toUpperCase();
-                        }
-                        ELog.i("=======接收数据包===ret==111===" + ret);
+//                        String ret = "";
+//                        for (int j = 0; j < recePacket.getLength(); j++) {
+//                            String hex = Integer.toHexString(recePacket.getData()[j] & 0xFF);
+//                            if (hex.length() == 1) {
+//                                hex = "0" + hex;
+//                            }
+//                            ret += hex.toUpperCase();
+//                        }
+//                        ELog.i("=======接收数据包===ret==111===" + ret);
                         String msgType = Integer.toHexString(recePacket.getData()[3] & 0xFF);
                         ELog.i("=======接收数据包===msgType=====" + msgType);
                         if (mhandler != null && msgType.equals("a0")) {
@@ -158,7 +158,6 @@ public class UDPUtil {
                                             accum |= (buffer[shiftBy] & 0xff) << shiftBy * 8;
                                         }
                                         float value = Float.intBitsToFloat(accum);
-                                        ELog.i("=======接收数据包===float=====value=======" + value);
                                         strArray[1 + n] = value + "";
                                     }
                                     ELog.i("==========value==strArray=====" + Arrays.toString(strArray));

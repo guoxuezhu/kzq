@@ -46,6 +46,7 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
         ButterKnife.bind(this);
 
         devicesDataDao = MyApplication.getDaoSession().getDevicesDataDao();
+        devicesDataDao.deleteAll();
         UDPUtil.setDeviceHandler(deviceHandler);
         initView();
         String wg_ip = this.getIntent().getStringExtra("wg_ip");
