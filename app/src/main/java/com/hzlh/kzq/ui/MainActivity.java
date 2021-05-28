@@ -73,10 +73,6 @@ public class MainActivity extends BaseActivity implements WgAdapter.CallBack {
         startActivity(intent);
     }
 
-    @OnClick(R.id.btn_lianjie)
-    public void btn_lianjie() {
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

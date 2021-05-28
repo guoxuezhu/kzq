@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kzq"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.DevicesActivity"></activity>
+        <activity android:name=".ui.DeviceInfoActivity"></activity>
+        <activity android:name=".ui.DevicesActivity" />
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.SplashActivity">
             <intent-filter>

@@ -13,6 +13,10 @@
 
     <color name="et_bg_color_1">#ff3367d6</color>
 
+    <color name="switch_bg_1">#ff4FB306</color>
+    <color name="switch_bg_2">#FFF3F8EE</color>
+    <color name="switch_nei_1">#FF60EECB</color>
+    <color name="switch_nei_2">#FF8B8F87</color>
 
 
 
@@ -24,5 +28,30 @@
     <color name="btn_6">#ff2736DC</color>
     <color name="btn_7">#ff071AEB</color>
     <color name="btn_8">#ff0D74F2</color>
+
+
+
+
+
+    <!-- Default user icon colors -->
+    <color name="user_icon_1">#ff00bcd4</color><!-- cyan 500 -->
+    <color name="user_icon_2">#ff3f51b5</color><!-- indigo 500 -->
+    <color name="user_icon_3">#ff4285f4</color><!-- blue 500 -->
+    <color name="user_icon_4">#ffe91e63</color><!-- pink 500 -->
+    <color name="user_icon_5">#ff0f9d58</color><!-- green 500 -->
+    <color name="user_icon_6">#ff8bc34a</color><!-- light green 500 -->
+    <color name="user_icon_7">#ffff9800</color><!-- orange 500 -->
+    <color name="user_icon_8">#ffff5722</color><!-- deep orange 500 -->
+    <color name="user_icon_default_gray">#ff9e9e9e</color><!-- gray 500 -->
+    <color name="user_icon_default_white">#ffffffff</color><!-- white -->
+
+    <!-- Default profile badge colors -->
+    <color name="profile_badge_1">#ff1A73E8</color><!-- Blue -->
+    <color name="profile_badge_2">#ffff6d00</color><!-- Orange -->
+    <color name="profile_badge_3">#ff22f033</color><!-- Green -->
+
+
+
+
 
 </resources>

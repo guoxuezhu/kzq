@@ -15,7 +15,13 @@
     <dimen name="dp_800">800dp</dimen>
     <dimen name="dp_900">900dp</dimen>
 
+    <dimen name="switch_width_1">60dp</dimen>
+    <dimen name="switch_width_2">30dp</dimen>
+    <dimen name="switch_height_1">25dp</dimen>
+
     <dimen name="dialog_radius_1">20dp</dimen>
+
+    <dimen name="switch_radius_1">10dp</dimen>
 
 
     <!-- 字体大小 -->
