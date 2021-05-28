@@ -13,12 +13,14 @@ import com.hzlh.kzq.R;
 import com.hzlh.kzq.adapter.DevicesAdapter;
 import com.hzlh.kzq.data.DbDao.DevicesDataDao;
 import com.hzlh.kzq.data.model.DevicesData;
+import com.hzlh.kzq.utils.ELog;
 import com.hzlh.kzq.utils.UDPUtil;
+import com.hzlh.kzq.utils.WgDataDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DevicesActivity extends BaseActivity implements DevicesAdapter.CallBack {
+public class DevicesActivity extends BaseActivity implements DevicesAdapter.CallBack, WgDataDialog.DialogCallBack {
 
     @BindView(R.id.device_recyclerView)
     RecyclerView device_recyclerView;
@@ -38,6 +40,7 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
 
         }
     };
+    private WgDataDialog wgDataDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,20 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
 
     @Override
     public void onClickDeviceItem(DevicesData devicesData) {
+        ELog.i("=======devicesData====" + devicesData.toString());
+        if (devicesData.device_type.equals("1")) {  // 4键 控制面板
 
+        } else if (devicesData.device_type.equals("2")) {  // 控制器
+            if (wgDataDialog == null) {
+                wgDataDialog = new WgDataDialog(this, null, this);
+            }
+            if (wgDataDialog != null) {
+                wgDataDialog.show();
+                wgDataDialog.setCanceledOnTouchOutside(false);
+            }
+        } else if (devicesData.device_type.equals("3")) {  // 串口透传
+
+        }
     }
 
     @Override
@@ -70,5 +86,17 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
         super.onBackPressed();
         UDPUtil.closeDeviceHandler();
         deviceHandler = null;
+    }
+
+    @Override
+    public void dismissDialog() {
+        closeDialog();
+    }
+
+    private void closeDialog() {
+        if (wgDataDialog != null) {
+            wgDataDialog.dismiss();
+            wgDataDialog = null;
+        }
     }
 }
