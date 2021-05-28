@@ -9,8 +9,6 @@ import com.hzlh.kzq.R;
 import com.hzlh.kzq.utils.ELog;
 import com.hzlh.kzq.utils.UDPUtil;
 
-import java.io.Serializable;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
@@ -47,7 +45,7 @@ public class DeviceInfoActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         wg_ip = this.getIntent().getStringExtra("wg_ip");
-        device_id = this.getIntent().getStringExtra("device_id");
+        device_id = this.getIntent().getLongExtra("device_id", 0) + "";
         value_1 = this.getIntent().getStringExtra("value_1");
         value_2 = this.getIntent().getStringExtra("value_2");
         value_3 = this.getIntent().getStringExtra("value_3");
@@ -56,12 +54,11 @@ public class DeviceInfoActivity extends BaseActivity {
 //        value_6 = this.getIntent().getStringExtra("value_6");
 //        value_7 = this.getIntent().getStringExtra("value_7");
 //        value_8 = this.getIntent().getStringExtra("value_8");
-//        devicesData = this.getIntent().getSerializableExtra("devicesData");
-//        ELog.i("======DeviceInfoActivity====devicesData====" + devicesData.toString());
         initView();
     }
 
     private void initView() {
+        ELog.i("=======value_1=======" + value_1);
         if (value_1.equals("1")) {
             wgbtn_switch_status.setChecked(true);
         } else {
@@ -77,13 +74,15 @@ public class DeviceInfoActivity extends BaseActivity {
     public void onkzqCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         ELog.i("=======isChecked=======" + isChecked);
         ELog.i("=======device_id=======" + device_id);
-        if (device_id.length() == 1) {
-            device_id = "0" + device_id;
+        String id = Integer.toHexString(Integer.valueOf(device_id));
+        if (id.length() == 1) {
+            id = "0" + id;
         }
+        ELog.i("=======id=======" + id);
         if (isChecked) {
-            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + device_id + "01" + "03" + "01" + "0A0D");
+            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "01" + "0A0D");
         } else {
-            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + device_id + "01" + "03" + "00" + "0A0D");
+            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "00" + "0A0D");
         }
     }
 
