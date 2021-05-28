@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="230dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_shape"
+    android:focusableInTouchMode="true"
+    android:padding="@dimen/dp_20"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/wg_btn_cl"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_style"
+            android:text="窗帘"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/wg_btn_hbd"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@drawable/btn_style"
+            android:text="黑板灯"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/wg_btn_jsd"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_style"
+            android:text="教室灯"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/wg_btn_ms"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@drawable/btn_style"
+            android:text="场景"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

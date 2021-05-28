@@ -16,11 +16,12 @@ import com.hzlh.kzq.data.model.DevicesData;
 import com.hzlh.kzq.utils.ELog;
 import com.hzlh.kzq.utils.UDPUtil;
 import com.hzlh.kzq.utils.WgDataDialog;
+import com.hzlh.kzq.utils.WgmbDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DevicesActivity extends BaseActivity implements DevicesAdapter.CallBack, WgDataDialog.DialogCallBack {
+public class DevicesActivity extends BaseActivity implements DevicesAdapter.CallBack, WgDataDialog.DialogCallBack, WgmbDialog.DialogCallBack {
 
     @BindView(R.id.device_recyclerView)
     RecyclerView device_recyclerView;
@@ -41,6 +42,8 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
         }
     };
     private WgDataDialog wgDataDialog;
+    private WgmbDialog wgmbDialog;
+    private String wg_ip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,7 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
         devicesDataDao.deleteAll();
         UDPUtil.setDeviceHandler(deviceHandler);
         initView();
-        String wg_ip = this.getIntent().getStringExtra("wg_ip");
+        wg_ip = this.getIntent().getStringExtra("wg_ip");
         UDPUtil.sendMsg(wg_ip, "4C4800A20000000000000A0D");
     }
 
@@ -67,7 +70,13 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
     public void onClickDeviceItem(DevicesData devicesData) {
         ELog.i("=======devicesData====" + devicesData.toString());
         if (devicesData.device_type.equals("1")) {  // 4键 控制面板
-
+            if (wgmbDialog == null) {
+                wgmbDialog = new WgmbDialog(this, null, this);
+            }
+            if (wgmbDialog != null) {
+                wgmbDialog.show();
+                wgmbDialog.setCanceledOnTouchOutside(false);
+            }
         } else if (devicesData.device_type.equals("2")) {  // 控制器
             if (wgDataDialog == null) {
                 wgDataDialog = new WgDataDialog(this, null, this);
@@ -90,13 +99,22 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
 
     @Override
     public void dismissDialog() {
-        closeDialog();
-    }
-
-    private void closeDialog() {
         if (wgDataDialog != null) {
             wgDataDialog.dismiss();
             wgDataDialog = null;
         }
+    }
+
+    @Override
+    public void wgmbDismissDialog() {
+        if (wgmbDialog != null) {
+            wgmbDialog.dismiss();
+            wgmbDialog = null;
+        }
+    }
+
+    @Override
+    public void wgmbOnClick(int position, int status) {
+        UDPUtil.sendMsg(wg_ip, "4C4800A20000000000000A0D");
     }
 }
