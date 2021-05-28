@@ -1,5 +1,6 @@
 package com.hzlh.kzq.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,13 +16,11 @@ import com.hzlh.kzq.data.DbDao.DevicesDataDao;
 import com.hzlh.kzq.data.model.DevicesData;
 import com.hzlh.kzq.utils.ELog;
 import com.hzlh.kzq.utils.UDPUtil;
-import com.hzlh.kzq.utils.WgDataDialog;
-import com.hzlh.kzq.utils.WgmbDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DevicesActivity extends BaseActivity implements DevicesAdapter.CallBack, WgDataDialog.DialogCallBack, WgmbDialog.DialogCallBack {
+public class DevicesActivity extends BaseActivity implements DevicesAdapter.CallBack {
 
     @BindView(R.id.device_recyclerView)
     RecyclerView device_recyclerView;
@@ -41,8 +40,6 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
 
         }
     };
-    private WgDataDialog wgDataDialog;
-    private WgmbDialog wgmbDialog;
     private String wg_ip;
 
     @Override
@@ -70,24 +67,35 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
     public void onClickDeviceItem(DevicesData devicesData) {
         ELog.i("=======devicesData====" + devicesData.toString());
         if (devicesData.device_type.equals("1")) {  // 4键 控制面板
-            if (wgmbDialog == null) {
-                wgmbDialog = new WgmbDialog(this, null, this);
-            }
-            if (wgmbDialog != null) {
-                wgmbDialog.show();
-                wgmbDialog.setCanceledOnTouchOutside(false);
-            }
+//            if (wgmbDialog == null) {
+//                wgmbDialog = new WgmbDialog(this, null, this);
+//            }
+//            if (wgmbDialog != null) {
+//                wgmbDialog.show();
+//                wgmbDialog.setCanceledOnTouchOutside(false);
+//            }
         } else if (devicesData.device_type.equals("2")) {  // 控制器
-            if (wgDataDialog == null) {
-                wgDataDialog = new WgDataDialog(this, null, this);
-            }
-            if (wgDataDialog != null) {
-                wgDataDialog.show();
-                wgDataDialog.setCanceledOnTouchOutside(false);
-            }
+            Intent intent = new Intent(this, DeviceInfoActivity.class);
+            intent.putExtra("wg_ip", wg_ip);
+            intent.putExtra("device_id", devicesData.device_id);
+            intent.putExtra("value_1", devicesData.value_1);
+            intent.putExtra("value_2", devicesData.value_2);
+            intent.putExtra("value_3", devicesData.value_3);
+            intent.putExtra("value_4", devicesData.value_4);
+            intent.putExtra("value_5", devicesData.value_5);
+//            intent.putExtra("value_6", devicesData.value_6);
+//            intent.putExtra("value_7", devicesData.value_7);
+//            intent.putExtra("value_8", devicesData.value_8);
+            startActivity(intent);
         } else if (devicesData.device_type.equals("3")) {  // 串口透传
 
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        UDPUtil.closeDeviceHandler();
     }
 
     @Override
@@ -95,26 +103,5 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
         super.onBackPressed();
         UDPUtil.closeDeviceHandler();
         deviceHandler = null;
-    }
-
-    @Override
-    public void dismissDialog() {
-        if (wgDataDialog != null) {
-            wgDataDialog.dismiss();
-            wgDataDialog = null;
-        }
-    }
-
-    @Override
-    public void wgmbDismissDialog() {
-        if (wgmbDialog != null) {
-            wgmbDialog.dismiss();
-            wgmbDialog = null;
-        }
-    }
-
-    @Override
-    public void wgmbOnClick(int position, int status) {
-        UDPUtil.sendMsg(wg_ip, "4C4800A20000000000000A0D");
     }
 }
