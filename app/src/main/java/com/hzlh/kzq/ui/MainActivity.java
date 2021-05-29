@@ -92,4 +92,11 @@ public class MainActivity extends BaseActivity implements WgAdapter.CallBack {
         ELog.i("======MainActivity===onRestart======");
         UDPUtil.setMainHandler(mHandler);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ELog.i("======MainActivity===onRestart======");
+//        UDPUtil.closeMainHandler();
+    }
 }

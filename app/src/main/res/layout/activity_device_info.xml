@@ -13,7 +13,7 @@
         android:background="@color/purple_500"
         android:gravity="center"
         android:padding="@dimen/dp_20"
-        android:text="设备详情"
+        android:text="控制器设备详情"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_24" />
 

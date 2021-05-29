@@ -88,14 +88,26 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
 //            intent.putExtra("value_8", devicesData.value_8);
             startActivity(intent);
         } else if (devicesData.device_type.equals("3")) {  // 串口透传
-
+            Intent intent = new Intent(this, DeviceTouchuanActivity.class);
+            intent.putExtra("wg_ip", wg_ip);
+            intent.putExtra("device_id", devicesData.device_id);
+            intent.putExtra("value_1", devicesData.value_1);
+            startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        UDPUtil.setDeviceHandler(deviceHandler);
+        ELog.i("=======onRestart=======");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         UDPUtil.closeDeviceHandler();
+        ELog.i("=======onStop=======");
     }
 
     @Override
