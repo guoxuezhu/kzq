@@ -93,6 +93,11 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
             intent.putExtra("device_id", devicesData.device_id);
             intent.putExtra("value_1", devicesData.value_1);
             startActivity(intent);
+        } else if (devicesData.device_type.equals("4")) {  // 风扇控制
+            Intent intent = new Intent(this, DianfsActivity.class);
+            intent.putExtra("wg_ip", wg_ip);
+            intent.putExtra("device_id", devicesData.device_id);
+            startActivity(intent);
         }
     }
 
@@ -100,6 +105,7 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
     protected void onRestart() {
         super.onRestart();
         UDPUtil.setDeviceHandler(deviceHandler);
+        devicesAdapter.setDatas(devicesDataDao.loadAll());
         ELog.i("=======onRestart=======");
     }
 

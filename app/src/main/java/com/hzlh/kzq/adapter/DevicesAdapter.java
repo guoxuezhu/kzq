@@ -44,12 +44,15 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         holder.tv_device_id.setText(devicesData.device_id + "");
         if (devicesData.device_type.equals("1")) {
             holder.tv_device_type.setText("控制面板");
-            holder.tv_device_type.setTextColor(mContext.getResources().getColor(R.color.green));
+            holder.tv_device_type.setTextColor(mContext.getResources().getColor(R.color.black));
         } else if (devicesData.device_type.equals("2")) {
             holder.tv_device_type.setText("控制器");
             holder.tv_device_type.setTextColor(mContext.getResources().getColor(R.color.green));
         } else if (devicesData.device_type.equals("3")) {
             holder.tv_device_type.setText("串口透传");
+            holder.tv_device_type.setTextColor(mContext.getResources().getColor(R.color.green));
+        } else if (devicesData.device_type.equals("4")) {
+            holder.tv_device_type.setText("风扇控制");
             holder.tv_device_type.setTextColor(mContext.getResources().getColor(R.color.green));
         } else {
             holder.tv_device_type.setText("离线设备");

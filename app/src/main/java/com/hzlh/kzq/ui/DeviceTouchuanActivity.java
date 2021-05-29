@@ -1,7 +1,6 @@
 package com.hzlh.kzq.ui;
 
 import android.os.Bundle;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.hzlh.kzq.R;
@@ -10,7 +9,6 @@ import com.hzlh.kzq.utils.UDPUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 public class DeviceTouchuanActivity extends BaseActivity {

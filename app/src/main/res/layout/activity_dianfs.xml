@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.DianfsActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:gravity="center"
+        android:padding="@dimen/dp_20"
+        android:text="电风扇设备详情"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_24" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rbtn_dfs_close"
+            style="@style/my_radio_button_1"
+            android:text="停止"
+            app:buttonCompat="@null" />
+
+        <RadioButton
+            android:id="@+id/rbtn_dfs_fs_1"
+            style="@style/my_radio_button_1"
+            android:text="风速一级"
+            app:buttonCompat="@null" />
+
+        <RadioButton
+            android:id="@+id/rbtn_dfs_fs_2"
+            style="@style/my_radio_button_1"
+            android:text="风速二级"
+            app:buttonCompat="@null" />
+
+        <RadioButton
+            android:id="@+id/rbtn_dfs_fs_3"
+            style="@style/my_radio_button_1"
+            android:text="风速三级"
+            app:buttonCompat="@null" />
+
+
+    </RadioGroup>
+
+</LinearLayout>

@@ -170,6 +170,13 @@ public class UDPUtil {
                                             Integer.toHexString(recePacket.getData()[i * 66 + 60] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 64] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 68] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 72] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 76] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 80] & 0xFF)));
+                                } else if (device_type.equals("4")) {
+                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
+                                            Integer.toHexString(recePacket.getData()[i * 66 + 52] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 56] & 0xFF),
+                                            Integer.toHexString(recePacket.getData()[i * 66 + 60] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 64] & 0xFF),
+                                            Integer.toHexString(recePacket.getData()[i * 66 + 68] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 72] & 0xFF),
+                                            Integer.toHexString(recePacket.getData()[i * 66 + 76] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 80] & 0xFF)));
+
                                 } else {
                                     devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
                                             "", "", "", "", "", "", "", ""));
@@ -178,6 +185,19 @@ public class UDPUtil {
                             }
                             ELog.i("=======接收数据包===devicesDataDao=====" + devicesDataDao.loadAll().toString());
                             deviceHandler.sendEmptyMessage(1002);
+                        }
+
+                        if (msgType.equals("a4")) {
+                            String device_id = Integer.toHexString(recePacket.getData()[16] & 0xFF);
+                            String value1 = Integer.toHexString(recePacket.getData()[51] & 0xFF);
+                            ELog.i("=======接收数据包===a4=====" + device_id);
+                            ELog.i("=======接收数据包===a4=====" + value1);
+                            DevicesDataDao devicesDataDao = MyApplication.getDaoSession().getDevicesDataDao();
+                            DevicesData devicesData = devicesDataDao.load(Long.parseLong(device_id, 16));
+                            if (devicesData != null) {
+                                devicesData.setValue_1(value1);
+                                devicesDataDao.update(devicesData);
+                            }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
