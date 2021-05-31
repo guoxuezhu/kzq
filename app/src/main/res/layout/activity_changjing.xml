@@ -5,22 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.ChangjingActivity">
 
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/purple_500">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="网关信息"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_26" />
-
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:gravity="center"
+        android:padding="@dimen/dp_20"
+        android:text="场景详情"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_24" />
 
     <View
         style="@style/xian_1"
@@ -39,20 +34,20 @@
 
         <TextView
             style="@style/text_view_1"
-            android:text="网关IP" />
+            android:text="场景 ID" />
 
         <View style="@style/xian_2" />
 
         <TextView
             style="@style/text_view_1"
-            android:text="状态" />
+            android:text="操作" />
 
     </LinearLayout>
 
     <View style="@style/xian_1" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/wg_recyclerView"
+        android:id="@+id/changjing_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

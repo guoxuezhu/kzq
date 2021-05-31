@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kzq"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.DianfsActivity"></activity>
+        <activity android:name=".ui.ChangjingActivity"></activity>
+        <activity android:name=".ui.DianfsActivity" />
         <activity android:name=".ui.DeviceTouchuanActivity" />
         <activity android:name=".ui.DeviceInfoActivity" />
         <activity android:name=".ui.DevicesActivity" />

@@ -67,6 +67,9 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
     public void onClickDeviceItem(DevicesData devicesData) {
         ELog.i("=======devicesData====" + devicesData.toString());
         if (devicesData.device_type.equals("1")) {  // 4键 控制面板
+            Intent intent = new Intent(this, ChangjingActivity.class);
+            intent.putExtra("wg_ip", wg_ip);
+            startActivity(intent);
 //            if (wgmbDialog == null) {
 //                wgmbDialog = new WgmbDialog(this, null, this);
 //            }

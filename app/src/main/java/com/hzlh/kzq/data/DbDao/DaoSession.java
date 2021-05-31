@@ -8,9 +8,11 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.hzlh.kzq.data.model.ChangjingDatas;
 import com.hzlh.kzq.data.model.DevicesData;
 import com.hzlh.kzq.data.model.WgDatas;
 
+import com.hzlh.kzq.data.DbDao.ChangjingDatasDao;
 import com.hzlh.kzq.data.DbDao.DevicesDataDao;
 import com.hzlh.kzq.data.DbDao.WgDatasDao;
 
@@ -23,9 +25,11 @@ import com.hzlh.kzq.data.DbDao.WgDatasDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig changjingDatasDaoConfig;
     private final DaoConfig devicesDataDaoConfig;
     private final DaoConfig wgDatasDaoConfig;
 
+    private final ChangjingDatasDao changjingDatasDao;
     private final DevicesDataDao devicesDataDao;
     private final WgDatasDao wgDatasDao;
 
@@ -33,22 +37,32 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
+        changjingDatasDaoConfig = daoConfigMap.get(ChangjingDatasDao.class).clone();
+        changjingDatasDaoConfig.initIdentityScope(type);
+
         devicesDataDaoConfig = daoConfigMap.get(DevicesDataDao.class).clone();
         devicesDataDaoConfig.initIdentityScope(type);
 
         wgDatasDaoConfig = daoConfigMap.get(WgDatasDao.class).clone();
         wgDatasDaoConfig.initIdentityScope(type);
 
+        changjingDatasDao = new ChangjingDatasDao(changjingDatasDaoConfig, this);
         devicesDataDao = new DevicesDataDao(devicesDataDaoConfig, this);
         wgDatasDao = new WgDatasDao(wgDatasDaoConfig, this);
 
+        registerDao(ChangjingDatas.class, changjingDatasDao);
         registerDao(DevicesData.class, devicesDataDao);
         registerDao(WgDatas.class, wgDatasDao);
     }
     
     public void clear() {
+        changjingDatasDaoConfig.clearIdentityScope();
         devicesDataDaoConfig.clearIdentityScope();
         wgDatasDaoConfig.clearIdentityScope();
+    }
+
+    public ChangjingDatasDao getChangjingDatasDao() {
+        return changjingDatasDao;
     }
 
     public DevicesDataDao getDevicesDataDao() {

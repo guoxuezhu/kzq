@@ -3,8 +3,10 @@ package com.hzlh.kzq.utils;
 import android.os.Handler;
 
 import com.hzlh.kzq.MyApplication;
+import com.hzlh.kzq.data.DbDao.ChangjingDatasDao;
 import com.hzlh.kzq.data.DbDao.DevicesDataDao;
 import com.hzlh.kzq.data.DbDao.WgDatasDao;
+import com.hzlh.kzq.data.model.ChangjingDatas;
 import com.hzlh.kzq.data.model.DevicesData;
 import com.hzlh.kzq.data.model.WgDatas;
 
@@ -17,7 +19,7 @@ import java.util.List;
 public class UDPUtil {
 
     private static DatagramSocket udpSocket;
-    private static Handler mhandler, deviceHandler;
+    private static Handler mhandler, deviceHandler, changjingHandler;
     private static boolean isRun = false;
 
     private static void init() {
@@ -38,20 +40,6 @@ public class UDPUtil {
                 sendUdpMsg(wg_ip, StringToBytes(ml));
             }
         }.start();
-    }
-
-    public static void doWangguan(String ml) {
-        // 5-1-1 5-10-1
-        String[] mls = ml.split("-");
-        if (mls.length != 3) {
-            return;
-        }
-
-        String hex = Integer.toHexString(Integer.valueOf(mls[1]));
-        if (hex.length() == 1) {
-            hex = "0" + hex;
-        }
-        sendUdpMsg("192.168.0.226", StringToBytes("4C4801A9010000000100" + hex + "0A0D"));
     }
 
     private static byte[] StringToBytes(String str) {
@@ -199,6 +187,21 @@ public class UDPUtil {
                                 devicesDataDao.update(devicesData);
                             }
                         }
+
+                        if (changjingHandler != null && msgType.equals("a7")) {
+                            ChangjingDatasDao changjingDatasDao = MyApplication.getDaoSession().getChangjingDatasDao();
+                            changjingDatasDao.deleteAll();
+                            // CC0101A74C4800A75500000000 06 05 01 02 05 04 06 0A0DCD
+                            String cjCount = Integer.toHexString(recePacket.getData()[14] & 0xFF);
+                            Integer cjSize = Integer.valueOf(cjCount);
+                            for (int n = 0; n < cjSize; n++) {
+                                String cjId = Integer.toHexString(recePacket.getData()[15 + n] & 0xFF);
+                                changjingDatasDao.insert(new ChangjingDatas(Long.parseLong(cjId, 16), "场景"));
+                            }
+                            ELog.i("=======接收数据包===changjingDatasDao=====" + changjingDatasDao.loadAll().toString());
+                            changjingHandler.sendEmptyMessage(1003);
+                        }
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -229,5 +232,13 @@ public class UDPUtil {
             udpSocket.close();
             udpSocket = null;
         }
+    }
+
+    public static void setChangjingHandler(Handler handler) {
+        changjingHandler = handler;
+    }
+
+    public static void closeChangjingHandler() {
+        changjingHandler = null;
     }
 }
