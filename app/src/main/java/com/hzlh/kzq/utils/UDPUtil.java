@@ -10,6 +10,7 @@ import com.hzlh.kzq.data.model.ChangjingDatas;
 import com.hzlh.kzq.data.model.DevicesData;
 import com.hzlh.kzq.data.model.WgDatas;
 
+import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
@@ -32,12 +33,12 @@ public class UDPUtil {
         }
     }
 
-    public static void sendMsg(String wg_ip, String ml) {
+    public static void sendMsg(String wg_ip, String ml, int port) {
         new Thread() {
             @Override
             public void run() {
                 super.run();
-                sendUdpMsg(wg_ip, StringToBytes(ml));
+                sendUdpMsg(wg_ip, StringToBytes(ml), port);
             }
         }.start();
     }
@@ -57,13 +58,13 @@ public class UDPUtil {
         }
     }
 
-    private static void sendUdpMsg(String ip, byte[] msgbyte) {
+    private static void sendUdpMsg(String ip, byte[] msgbyte, int port) {
         if (udpSocket == null) {
             init();
         }
         try {
             DatagramPacket dp = new DatagramPacket(msgbyte, msgbyte.length);
-            dp.setSocketAddress(new InetSocketAddress(ip, 10101));
+            dp.setSocketAddress(new InetSocketAddress(ip, port));
             udpSocket.send(dp);//发送一条广播信息
             ELog.i("=======发送一条广播信息========");
         } catch (Exception e) {
@@ -98,21 +99,74 @@ public class UDPUtil {
                         ELog.i("=======接收数据包===ret==111===" + ret);
                         String msgType = Integer.toHexString(recePacket.getData()[3] & 0xFF);
                         ELog.i("=======接收数据包===msgType=====" + msgType);
-                        if (mhandler != null && msgType.equals("a0")) {
+                        if (msgType.equals("b0") || msgType.equals("a1")) {
                             WgDatasDao wgDatasDao = MyApplication.getDaoSession().getWgDatasDao();
+                            String wg_name = "";
+                            try {
+                                wg_name = new String(recePacket.getData(), 14, 20, "GBK").trim();
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                            ELog.i("=======接收数据包===wg_name=======" + wg_name);
+                            String wg_ip = Integer.parseInt(Integer.toHexString(recePacket.getData()[34] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[35] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[36] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[37] & 0xFF), 16);
+                            ELog.i("=======接收数据包===wg_ip=======" + wg_ip);
+
+                            String wg_wl_zwym = Integer.parseInt(Integer.toHexString(recePacket.getData()[38] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[39] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[40] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[41] & 0xFF), 16);
+                            ELog.i("=======接收数据包===wg_wl_zwym=======" + wg_wl_zwym);
+                            String wg_wl_wgip = Integer.parseInt(Integer.toHexString(recePacket.getData()[42] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[43] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[44] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[45] & 0xFF), 16);
+                            ELog.i("=======接收数据包===wg_wl_wgip=======" + wg_wl_wgip);
+                            String wg_mac = Integer.toHexString(recePacket.getData()[46] & 0xFF) + "."
+                                    + Integer.toHexString(recePacket.getData()[47] & 0xFF) + "."
+                                    + Integer.toHexString(recePacket.getData()[48] & 0xFF) + "."
+                                    + Integer.toHexString(recePacket.getData()[49] & 0xFF) + "."
+                                    + Integer.toHexString(recePacket.getData()[50] & 0xFF) + "."
+                                    + Integer.toHexString(recePacket.getData()[51] & 0xFF);
+                            ELog.i("=======接收数据包===wg_mac=======" + wg_mac);
+                            String wg_swj_ip = Integer.parseInt(Integer.toHexString(recePacket.getData()[52] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[53] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[54] & 0xFF), 16) + "."
+                                    + Integer.parseInt(Integer.toHexString(recePacket.getData()[55] & 0xFF), 16);
+                            ELog.i("=======接收数据包===wg_swj_ip=======" + wg_swj_ip);
+                            String hexPort = Integer.toHexString(recePacket.getData()[56] & 0xFF) + Integer.toHexString(recePacket.getData()[57] & 0xFF);
+                            int wg_swj_port = Integer.parseInt(hexPort, 16);
+                            ELog.i("=======接收数据包===wg_swj_port=======" + wg_swj_port);
                             List<WgDatas> wgDatas = wgDatasDao.queryBuilder()
-                                    .where(WgDatasDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)))
+                                    .where(WgDatasDao.Properties.Wg_ip.eq(wg_ip))
                                     .list();
                             if (wgDatas.size() != 0) {
-                                WgDatas wgData = wgDatas.get(0);
-                                wgData.setWg_status(1);
-                                wgDatasDao.update(wgData);
+                                wgDatasDao.update(new WgDatas(wgDatas.get(0).wg_id, wg_name, wg_ip, wg_wl_zwym,
+                                        wg_wl_wgip, wg_mac, wg_swj_ip, wg_swj_port + "", 1));
                             } else {
-                                wgDatasDao.insert(new WgDatas(null, recePacket.getAddress().toString().substring(1), "网关", "", 1));
+                                wgDatasDao.insert(new WgDatas(null, wg_name, wg_ip, wg_wl_zwym,
+                                        wg_wl_wgip, wg_mac, wg_swj_ip, wg_swj_port + "", 1));
                             }
-                            mhandler.sendEmptyMessage(1001);
+                            if (mhandler != null) {
+                                mhandler.sendEmptyMessage(1001);
+                            }
                         }
-
+//                        if (mhandler != null && msgType.equals("a0")) {
+//                            WgDatasDao wgDatasDao = MyApplication.getDaoSession().getWgDatasDao();
+//                            List<WgDatas> wgDatas = wgDatasDao.queryBuilder()
+//                                    .where(WgDatasDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)))
+//                                    .list();
+//                            if (wgDatas.size() != 0) {
+//                                WgDatas wgData = wgDatas.get(0);
+//                                wgData.setWg_status(1);
+//                                wgDatasDao.update(wgData);
+//                            } else {
+////                                wgDatasDao.insert(new WgDatas(null, recePacket.getAddress().toString().substring(1), "网关", "", 1));
+//                            }
+//                            mhandler.sendEmptyMessage(1001);
+//                        }
                         if (deviceHandler != null && msgType.equals("a2")) {
                             String device_numer = Integer.toHexString(recePacket.getData()[14] & 0xFF);
                             ELog.i("=======接收数据包===device_numer=====" + device_numer);
@@ -124,8 +178,16 @@ public class UDPUtil {
                                 String device_id = Integer.toHexString(recePacket.getData()[i * 66 + 17] & 0xFF);
                                 ELog.i("=======接收数据包===device_type==111===" + device_type);
                                 ELog.i("=======接收数据包===device_id===222====" + device_id);
+                                String device_name = "";
+                                try {
+                                    device_name = new String(recePacket.getData(), i * 66 + 21, 20, "GBK").trim();
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                                ELog.i("=======接收数据包===device_name===333====" + device_name);
+
                                 if (device_type.equals("1")) {
-                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
+                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), device_name, device_type, "1",
                                             Integer.toHexString(recePacket.getData()[i * 66 + 52] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 56] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 60] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 64] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 68] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 72] & 0xFF),
@@ -150,23 +212,23 @@ public class UDPUtil {
                                         }
                                     }
                                     ELog.i("==========value==strArray=====" + Arrays.toString(strArray));
-                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
+                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), device_name, device_type, "1",
                                             strArray[0], strArray[1], strArray[2], strArray[3], strArray[4], strArray[5], strArray[6], strArray[7]));
                                 } else if (device_type.equals("3")) {
-                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
+                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), device_name, device_type, "1",
                                             Integer.toHexString(recePacket.getData()[i * 66 + 52] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 56] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 60] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 64] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 68] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 72] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 76] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 80] & 0xFF)));
                                 } else if (device_type.equals("4")) {
-                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
+                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), device_name, device_type, "1",
                                             Integer.toHexString(recePacket.getData()[i * 66 + 52] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 56] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 60] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 64] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 68] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 72] & 0xFF),
                                             Integer.toHexString(recePacket.getData()[i * 66 + 76] & 0xFF), Integer.toHexString(recePacket.getData()[i * 66 + 80] & 0xFF)));
 
                                 } else {
-                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), "", device_type, "1",
+                                    devicesDataDao.insert(new DevicesData(Long.parseLong(device_id, 16), device_name, device_type, "1",
                                             "", "", "", "", "", "", "", ""));
                                 }
 

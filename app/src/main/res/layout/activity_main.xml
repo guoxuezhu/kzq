@@ -4,52 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/main_bg"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@color/purple_500">
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/img_logo"
+            android:src="@mipmap/logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="网关信息"
+            android:text="智慧教室物联控制系统"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_26" />
-
-    </RelativeLayout>
-
-    <View
-        style="@style/xian_1"
-        android:layout_marginTop="@dimen/dp_10" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/text_view_1"
-            android:text="序号" />
-
-        <View style="@style/xian_2" />
-
-        <TextView
-            style="@style/text_view_1"
-            android:text="网关IP" />
-
-        <View style="@style/xian_2" />
-
-        <TextView
-            style="@style/text_view_1"
-            android:text="状态" />
+            android:textSize="@dimen/text_size_20" />
 
     </LinearLayout>
 
     <View style="@style/xian_1" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/dp_50"
+        android:text="网关信息"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_26" />
+
+    <View
+        style="@style/xian_1"
+        android:layout_marginTop="@dimen/dp_10" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wg_recyclerView"

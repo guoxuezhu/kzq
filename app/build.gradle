@@ -27,7 +27,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            buildConfigField 'boolean', 'JAVA_LOG_ENABLED', 'false'
+            buildConfigField 'boolean', 'JAVA_LOG_ENABLED', 'true'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }

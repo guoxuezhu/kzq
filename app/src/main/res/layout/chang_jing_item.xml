@@ -9,6 +9,8 @@
         android:layout_height="@dimen/dp_60"
         android:orientation="horizontal">
 
+        <View style="@style/xian_2" />
+
         <TextView
             android:id="@+id/tv_cj_serialNumber"
             style="@style/text_view_1"
@@ -36,7 +38,10 @@
                 android:text="调用" />
         </LinearLayout>
 
+        <View style="@style/xian_2" />
+
     </LinearLayout>
 
     <View style="@style/xian_1" />
+
 </LinearLayout>

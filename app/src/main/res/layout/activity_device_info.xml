@@ -4,18 +4,203 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/main_bg"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".ui.DeviceInfoActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_500"
+        android:layout_height="70dp"
         android:gravity="center"
-        android:padding="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/img_logo"
+            android:src="@mipmap/logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="智慧教室物联控制系统"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+    </LinearLayout>
+
+    <View style="@style/xian_1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/dp_50"
         android:text="控制器设备详情"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size_24" />
+        android:textSize="@dimen/text_size_26" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_20"
+        android:orientation="vertical">
+
+        <View style="@style/xian_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:orientation="horizontal">
+
+            <View style="@style/xian_2" />
+
+            <TextView
+                style="@style/text_view_1"
+                android:text="设备状态" />
+
+            <View style="@style/xian_2" />
+
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbtn_kzq_open"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/btn_style_5"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="开"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14"
+                    app:buttonCompat="@null" />
+
+                <RadioButton
+                    android:id="@+id/rbtn_kzq_close"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:background="@drawable/btn_style_5"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="关"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14"
+                    app:buttonCompat="@null" />
+            </RadioGroup>
+
+
+            <View style="@style/xian_2" />
+
+        </LinearLayout>
+
+        <View style="@style/xian_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:orientation="horizontal">
+
+            <View style="@style/xian_2" />
+
+            <TextView
+                style="@style/text_view_1"
+                android:text="电压" />
+
+            <View style="@style/xian_2" />
+
+            <TextView
+                android:id="@+id/tv_dianya"
+                style="@style/text_view_1"
+                android:text="220" />
+
+            <View style="@style/xian_2" />
+
+        </LinearLayout>
+
+        <View style="@style/xian_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:orientation="horizontal">
+
+            <View style="@style/xian_2" />
+
+            <TextView
+                style="@style/text_view_1"
+                android:text="电流" />
+
+            <View style="@style/xian_2" />
+
+            <TextView
+                android:id="@+id/tv_dianliu"
+                style="@style/text_view_1"
+                android:text="220" />
+
+            <View style="@style/xian_2" />
+
+        </LinearLayout>
+
+        <View style="@style/xian_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:orientation="horizontal">
+
+            <View style="@style/xian_2" />
+
+            <TextView
+                style="@style/text_view_1"
+                android:text="功率" />
+
+            <View style="@style/xian_2" />
+
+            <TextView
+                android:id="@+id/tv_gonglv"
+                style="@style/text_view_1"
+                android:text="220" />
+
+            <View style="@style/xian_2" />
+
+        </LinearLayout>
+
+        <View style="@style/xian_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:orientation="horizontal">
+
+            <View style="@style/xian_2" />
+
+            <TextView
+                style="@style/text_view_1"
+                android:text="电量" />
+
+            <View style="@style/xian_2" />
+
+            <TextView
+                android:id="@+id/tv_dianliang"
+                style="@style/text_view_1"
+                android:text="220" />
+
+            <View style="@style/xian_2" />
+
+        </LinearLayout>
+
+        <View style="@style/xian_1" />
+
+    </LinearLayout>
+
 
     <Switch
         android:id="@+id/wgbtn_switch_status"
@@ -29,108 +214,8 @@
         android:textOn="开"
         android:textSize="@dimen/text_size_20"
         android:thumb="@drawable/switch_thumb_bg"
-        android:track="@drawable/switch_selector_bg" />
-
-    <View style="@style/xian_1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_10">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="电压:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-
-        <TextView
-            android:id="@+id/tv_dianya"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="220"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-    </LinearLayout>
-
-    <View style="@style/xian_1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_10">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="电流:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-
-        <TextView
-            android:id="@+id/tv_dianliu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="220"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-    </LinearLayout>
-
-    <View style="@style/xian_1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_10">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="功率:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-
-        <TextView
-            android:id="@+id/tv_gonglv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="220"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-    </LinearLayout>
-
-    <View style="@style/xian_1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_10">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="电量:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-
-        <TextView
-            android:id="@+id/tv_dianliang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="220"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-    </LinearLayout>
-
+        android:track="@drawable/switch_selector_bg"
+        android:visibility="gone" />
 
 
 </LinearLayout>

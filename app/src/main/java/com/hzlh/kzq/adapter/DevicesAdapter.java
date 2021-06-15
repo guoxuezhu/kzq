@@ -42,6 +42,11 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         DevicesData devicesData = datas.get(position);
         holder.tv_device_serialNumber.setText((position + 1) + "");
         holder.tv_device_id.setText(devicesData.device_id + "");
+        if (devicesData.device_name.isEmpty()) {
+            holder.tv_device_name.setText("未知设备");
+        } else {
+            holder.tv_device_name.setText(devicesData.device_name + "");
+        }
         if (devicesData.device_type.equals("1")) {
             holder.tv_device_type.setText("控制面板");
             holder.tv_device_type.setTextColor(mContext.getResources().getColor(R.color.black));
@@ -88,6 +93,8 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         TextView tv_device_serialNumber;
         @BindView(R.id.tv_device_id)
         TextView tv_device_id;
+        @BindView(R.id.tv_device_name)
+        TextView tv_device_name;
         @BindView(R.id.tv_device_type)
         TextView tv_device_type;
 

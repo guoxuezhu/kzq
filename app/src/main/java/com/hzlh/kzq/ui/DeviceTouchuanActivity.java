@@ -1,6 +1,7 @@
 package com.hzlh.kzq.ui;
 
 import android.os.Bundle;
+import android.widget.RadioButton;
 import android.widget.Switch;
 
 import com.hzlh.kzq.R;
@@ -15,6 +16,11 @@ public class DeviceTouchuanActivity extends BaseActivity {
 
     @BindView(R.id.wgbtn_switch_status_3)
     Switch wgbtn_switch_status_3;
+
+    @BindView(R.id.rbtn_kzq_tc_open)
+    RadioButton rbtn_kzq_tc_open;
+    @BindView(R.id.rbtn_kzq_tc_close)
+    RadioButton rbtn_kzq_tc_close;
 
     private String wg_ip;
     private String device_id;
@@ -31,10 +37,32 @@ public class DeviceTouchuanActivity extends BaseActivity {
         value_1 = this.getIntent().getStringExtra("value_1");
 
         if (value_1.equals("1")) {
-            wgbtn_switch_status_3.setChecked(true);
+            rbtn_kzq_tc_open.setChecked(true);
         } else {
-            wgbtn_switch_status_3.setChecked(false);
+            rbtn_kzq_tc_close.setChecked(false);
         }
+    }
+
+    @OnClick(R.id.rbtn_kzq_tc_open)
+    public void rbtn_kzq_tc_open() {
+        ELog.i("=======device_id=======" + device_id);
+        String id = Integer.toHexString(Integer.valueOf(device_id));
+        if (id.length() == 1) {
+            id = "0" + id;
+        }
+        ELog.i("=======id=======" + id);
+        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "01" + "0A0D", 10101);
+    }
+
+    @OnClick(R.id.rbtn_kzq_tc_close)
+    public void rbtn_kzq_tc_close() {
+        ELog.i("=======device_id=======" + device_id);
+        String id = Integer.toHexString(Integer.valueOf(device_id));
+        if (id.length() == 1) {
+            id = "0" + id;
+        }
+        ELog.i("=======id=======" + id);
+        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "00" + "0A0D", 10101);
     }
 
     @OnClick(R.id.wgbtn_switch_status_3)
@@ -46,9 +74,9 @@ public class DeviceTouchuanActivity extends BaseActivity {
         }
         ELog.i("=======id=======" + id);
         if (wgbtn_switch_status_3.isChecked()) {
-            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "01" + "0A0D");
+            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "01" + "0A0D", 10101);
         } else {
-            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "00" + "0A0D");
+            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "00" + "0A0D", 10101);
         }
     }
 
@@ -73,7 +101,6 @@ public class DeviceTouchuanActivity extends BaseActivity {
         super.onBackPressed();
         finish();
     }
-
 
 
 }

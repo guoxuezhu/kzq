@@ -35,7 +35,7 @@ public class DianfsActivity extends BaseActivity {
             id = "0" + id;
         }
         ELog.i("=======id=======" + id);
-        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "01" + "0A0D");
+        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "01" + "0A0D", 10101);
     }
 
     @OnClick(R.id.rbtn_dfs_fs_1)
@@ -46,7 +46,7 @@ public class DianfsActivity extends BaseActivity {
             id = "0" + id;
         }
         ELog.i("=======id=======" + id);
-        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "02" + "03" + "01" + "0A0D");
+        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "02" + "03" + "01" + "0A0D", 10101);
     }
 
     @OnClick(R.id.rbtn_dfs_fs_2)
@@ -57,7 +57,7 @@ public class DianfsActivity extends BaseActivity {
             id = "0" + id;
         }
         ELog.i("=======id=======" + id);
-        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "03" + "03" + "01" + "0A0D");
+        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "03" + "03" + "01" + "0A0D", 10101);
     }
 
     @OnClick(R.id.rbtn_dfs_fs_3)
@@ -68,7 +68,7 @@ public class DianfsActivity extends BaseActivity {
             id = "0" + id;
         }
         ELog.i("=======id=======" + id);
-        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "04" + "03" + "01" + "0A0D");
+        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "04" + "03" + "01" + "0A0D", 10101);
     }
 
 }

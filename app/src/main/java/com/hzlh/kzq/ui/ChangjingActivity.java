@@ -50,7 +50,7 @@ public class ChangjingActivity extends BaseActivity implements ChangjingAdapter.
         UDPUtil.setChangjingHandler(changjingHandler);
         initView();
         wg_ip = this.getIntent().getStringExtra("wg_ip");
-        UDPUtil.sendMsg(wg_ip, "4C4801A7030000000100030A0D");
+        UDPUtil.sendMsg(wg_ip, "4C4801A7030000000100030A0D", 10101);
 
     }
 
@@ -67,7 +67,7 @@ public class ChangjingActivity extends BaseActivity implements ChangjingAdapter.
         if (cjid.length() == 1) {
             cjid = "0" + cjid;
         }
-        UDPUtil.sendMsg(wg_ip, "4C4801A9010000000100" + cjid + "0A0D");
+        UDPUtil.sendMsg(wg_ip, "4C4801A9010000000100" + cjid + "0A0D", 10101);
     }
 
     @Override

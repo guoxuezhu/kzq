@@ -25,10 +25,14 @@ public class WgDatasDao extends AbstractDao<WgDatas, Long> {
      */
     public static class Properties {
         public final static Property Wg_id = new Property(0, Long.class, "wg_id", true, "_id");
-        public final static Property Wg_ip = new Property(1, String.class, "wg_ip", false, "WG_IP");
-        public final static Property Wg_name = new Property(2, String.class, "wg_name", false, "WG_NAME");
-        public final static Property Wg_swj_ip = new Property(3, String.class, "wg_swj_ip", false, "WG_SWJ_IP");
-        public final static Property Wg_status = new Property(4, int.class, "wg_status", false, "WG_STATUS");
+        public final static Property Wg_name = new Property(1, String.class, "wg_name", false, "WG_NAME");
+        public final static Property Wg_ip = new Property(2, String.class, "wg_ip", false, "WG_IP");
+        public final static Property Wg_wl_zwym = new Property(3, String.class, "wg_wl_zwym", false, "WG_WL_ZWYM");
+        public final static Property Wg_wl_wgip = new Property(4, String.class, "wg_wl_wgip", false, "WG_WL_WGIP");
+        public final static Property Wg_mac = new Property(5, String.class, "wg_mac", false, "WG_MAC");
+        public final static Property Wg_swj_ip = new Property(6, String.class, "wg_swj_ip", false, "WG_SWJ_IP");
+        public final static Property Wg_swj_port = new Property(7, String.class, "wg_swj_port", false, "WG_SWJ_PORT");
+        public final static Property Wg_status = new Property(8, int.class, "wg_status", false, "WG_STATUS");
     }
 
 
@@ -45,10 +49,14 @@ public class WgDatasDao extends AbstractDao<WgDatas, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"WG_DATAS\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: wg_id
-                "\"WG_IP\" TEXT," + // 1: wg_ip
-                "\"WG_NAME\" TEXT," + // 2: wg_name
-                "\"WG_SWJ_IP\" TEXT," + // 3: wg_swj_ip
-                "\"WG_STATUS\" INTEGER NOT NULL );"); // 4: wg_status
+                "\"WG_NAME\" TEXT," + // 1: wg_name
+                "\"WG_IP\" TEXT," + // 2: wg_ip
+                "\"WG_WL_ZWYM\" TEXT," + // 3: wg_wl_zwym
+                "\"WG_WL_WGIP\" TEXT," + // 4: wg_wl_wgip
+                "\"WG_MAC\" TEXT," + // 5: wg_mac
+                "\"WG_SWJ_IP\" TEXT," + // 6: wg_swj_ip
+                "\"WG_SWJ_PORT\" TEXT," + // 7: wg_swj_port
+                "\"WG_STATUS\" INTEGER NOT NULL );"); // 8: wg_status
     }
 
     /** Drops the underlying database table. */
@@ -66,21 +74,41 @@ public class WgDatasDao extends AbstractDao<WgDatas, Long> {
             stmt.bindLong(1, wg_id);
         }
  
-        String wg_ip = entity.getWg_ip();
-        if (wg_ip != null) {
-            stmt.bindString(2, wg_ip);
-        }
- 
         String wg_name = entity.getWg_name();
         if (wg_name != null) {
-            stmt.bindString(3, wg_name);
+            stmt.bindString(2, wg_name);
+        }
+ 
+        String wg_ip = entity.getWg_ip();
+        if (wg_ip != null) {
+            stmt.bindString(3, wg_ip);
+        }
+ 
+        String wg_wl_zwym = entity.getWg_wl_zwym();
+        if (wg_wl_zwym != null) {
+            stmt.bindString(4, wg_wl_zwym);
+        }
+ 
+        String wg_wl_wgip = entity.getWg_wl_wgip();
+        if (wg_wl_wgip != null) {
+            stmt.bindString(5, wg_wl_wgip);
+        }
+ 
+        String wg_mac = entity.getWg_mac();
+        if (wg_mac != null) {
+            stmt.bindString(6, wg_mac);
         }
  
         String wg_swj_ip = entity.getWg_swj_ip();
         if (wg_swj_ip != null) {
-            stmt.bindString(4, wg_swj_ip);
+            stmt.bindString(7, wg_swj_ip);
         }
-        stmt.bindLong(5, entity.getWg_status());
+ 
+        String wg_swj_port = entity.getWg_swj_port();
+        if (wg_swj_port != null) {
+            stmt.bindString(8, wg_swj_port);
+        }
+        stmt.bindLong(9, entity.getWg_status());
     }
 
     @Override
@@ -92,21 +120,41 @@ public class WgDatasDao extends AbstractDao<WgDatas, Long> {
             stmt.bindLong(1, wg_id);
         }
  
-        String wg_ip = entity.getWg_ip();
-        if (wg_ip != null) {
-            stmt.bindString(2, wg_ip);
-        }
- 
         String wg_name = entity.getWg_name();
         if (wg_name != null) {
-            stmt.bindString(3, wg_name);
+            stmt.bindString(2, wg_name);
+        }
+ 
+        String wg_ip = entity.getWg_ip();
+        if (wg_ip != null) {
+            stmt.bindString(3, wg_ip);
+        }
+ 
+        String wg_wl_zwym = entity.getWg_wl_zwym();
+        if (wg_wl_zwym != null) {
+            stmt.bindString(4, wg_wl_zwym);
+        }
+ 
+        String wg_wl_wgip = entity.getWg_wl_wgip();
+        if (wg_wl_wgip != null) {
+            stmt.bindString(5, wg_wl_wgip);
+        }
+ 
+        String wg_mac = entity.getWg_mac();
+        if (wg_mac != null) {
+            stmt.bindString(6, wg_mac);
         }
  
         String wg_swj_ip = entity.getWg_swj_ip();
         if (wg_swj_ip != null) {
-            stmt.bindString(4, wg_swj_ip);
+            stmt.bindString(7, wg_swj_ip);
         }
-        stmt.bindLong(5, entity.getWg_status());
+ 
+        String wg_swj_port = entity.getWg_swj_port();
+        if (wg_swj_port != null) {
+            stmt.bindString(8, wg_swj_port);
+        }
+        stmt.bindLong(9, entity.getWg_status());
     }
 
     @Override
@@ -118,10 +166,14 @@ public class WgDatasDao extends AbstractDao<WgDatas, Long> {
     public WgDatas readEntity(Cursor cursor, int offset) {
         WgDatas entity = new WgDatas( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // wg_id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // wg_ip
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // wg_name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // wg_swj_ip
-            cursor.getInt(offset + 4) // wg_status
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // wg_name
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // wg_ip
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // wg_wl_zwym
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // wg_wl_wgip
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // wg_mac
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // wg_swj_ip
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // wg_swj_port
+            cursor.getInt(offset + 8) // wg_status
         );
         return entity;
     }
@@ -129,10 +181,14 @@ public class WgDatasDao extends AbstractDao<WgDatas, Long> {
     @Override
     public void readEntity(Cursor cursor, WgDatas entity, int offset) {
         entity.setWg_id(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setWg_ip(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setWg_name(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setWg_swj_ip(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setWg_status(cursor.getInt(offset + 4));
+        entity.setWg_name(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setWg_ip(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setWg_wl_zwym(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setWg_wl_wgip(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setWg_mac(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setWg_swj_ip(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setWg_swj_port(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setWg_status(cursor.getInt(offset + 8));
      }
     
     @Override

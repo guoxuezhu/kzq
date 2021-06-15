@@ -21,6 +21,9 @@
 
     <dimen name="dialog_radius_1">20dp</dimen>
 
+    <dimen name="btn_radius_1">10dp</dimen>
+    <dimen name="btn_radius_2">40dp</dimen>
+
     <dimen name="switch_radius_1">10dp</dimen>
 
 

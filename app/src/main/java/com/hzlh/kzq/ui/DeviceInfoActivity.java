@@ -3,6 +3,7 @@ package com.hzlh.kzq.ui;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -28,6 +29,12 @@ public class DeviceInfoActivity extends BaseActivity {
 
     @BindView(R.id.wgbtn_switch_status)
     Switch wgbtn_switch_status;
+
+    @BindView(R.id.rbtn_kzq_open)
+    RadioButton rbtn_kzq_open;
+    @BindView(R.id.rbtn_kzq_close)
+    RadioButton rbtn_kzq_close;
+
 
     private String wg_ip;
     private String device_id;
@@ -62,15 +69,40 @@ public class DeviceInfoActivity extends BaseActivity {
     private void initView() {
         ELog.i("=======value_1=======" + value_1);
         if (value_1.equals("1")) {
-            wgbtn_switch_status.setChecked(true);
+            rbtn_kzq_open.setChecked(true);
         } else {
-            wgbtn_switch_status.setChecked(false);
+            rbtn_kzq_close.setChecked(false);
         }
         tv_dianya.setText(value_2);
         tv_dianliu.setText(value_3);
         tv_gonglv.setText(value_4);
         tv_dianliang.setText(value_5);
     }
+
+    @OnClick(R.id.rbtn_kzq_open)
+    public void rbtn_kzq_open() {
+        ELog.i("=======device_id=======" + device_id);
+        String id = Integer.toHexString(Integer.valueOf(device_id));
+        if (id.length() == 1) {
+            id = "0" + id;
+        }
+        ELog.i("=======id=======" + id);
+        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "01" + "0A0D", 10101);
+
+    }
+
+    @OnClick(R.id.rbtn_kzq_close)
+    public void rbtn_kzq_close() {
+        ELog.i("=======device_id=======" + device_id);
+        String id = Integer.toHexString(Integer.valueOf(device_id));
+        if (id.length() == 1) {
+            id = "0" + id;
+        }
+        ELog.i("=======id=======" + id);
+        UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "00" + "0A0D", 10101);
+
+    }
+
 
     @OnClick(R.id.wgbtn_switch_status)
     public void wgbtn_switch_status() {
@@ -81,9 +113,9 @@ public class DeviceInfoActivity extends BaseActivity {
         }
         ELog.i("=======id=======" + id);
         if (wgbtn_switch_status.isChecked()) {
-            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "01" + "0A0D");
+            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "01" + "0A0D", 10101);
         } else {
-            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "00" + "0A0D");
+            UDPUtil.sendMsg(wg_ip, "4C4801A4000000000400" + id + "01" + "03" + "00" + "0A0D", 10101);
         }
     }
 

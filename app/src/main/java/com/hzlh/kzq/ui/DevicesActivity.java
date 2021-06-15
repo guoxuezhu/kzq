@@ -53,7 +53,7 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
         UDPUtil.setDeviceHandler(deviceHandler);
         initView();
         wg_ip = this.getIntent().getStringExtra("wg_ip");
-        UDPUtil.sendMsg(wg_ip, "4C4800A20000000000000A0D");
+        UDPUtil.sendMsg(wg_ip, "4C4800A20000000000000A0D", 10101);
     }
 
     private void initView() {
@@ -67,9 +67,6 @@ public class DevicesActivity extends BaseActivity implements DevicesAdapter.Call
     public void onClickDeviceItem(DevicesData devicesData) {
         ELog.i("=======devicesData====" + devicesData.toString());
         if (devicesData.device_type.equals("1")) {  // 4键 控制面板
-            Intent intent = new Intent(this, ChangjingActivity.class);
-            intent.putExtra("wg_ip", wg_ip);
-            startActivity(intent);
 //            if (wgmbDialog == null) {
 //                wgmbDialog = new WgmbDialog(this, null, this);
 //            }

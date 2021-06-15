@@ -40,8 +40,13 @@ public class WgAdapter extends RecyclerView.Adapter<WgAdapter.WgViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull WgViewHolder holder, int position) {
         WgDatas wgData = datas.get(position);
-        holder.tv_wg_serialNumber.setText((position + 1) + "");
-        holder.tv_wg_ip.setText(wgData.wg_ip);
+        holder.tv_wg_name.setText("名称:" + wgData.wg_name);
+        holder.tv_wg_ip.setText("网关IP:" + wgData.wg_ip);
+        holder.tv_wg_wl_zwym.setText("子网掩码:" + wgData.wg_wl_zwym);
+        holder.tv_wg_wl_wgip.setText("网关:" + wgData.wg_wl_wgip);
+        holder.tv_wg_mac.setText("MAC地址:" + wgData.wg_mac);
+        holder.tv_wg_swj_ip.setText("上位机IP:" + wgData.wg_swj_ip);
+        holder.tv_wg_swj_port.setText("上位机端口:" + wgData.wg_swj_port);
         if (wgData.wg_status == 1) {
             holder.tv_status.setText("在线");
             holder.tv_status.setTextColor(mContext.getResources().getColor(R.color.green));
@@ -64,14 +69,27 @@ public class WgAdapter extends RecyclerView.Adapter<WgAdapter.WgViewHolder> {
 
     public interface CallBack {
         void onClickWgItem(WgDatas wgDatas);
+
+        void onClickWgSetingItem(WgDatas wgDatas);
     }
 
     public class WgViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_wg_serialNumber)
-        TextView tv_wg_serialNumber;
+
+        @BindView(R.id.tv_wg_name)
+        TextView tv_wg_name;
         @BindView(R.id.tv_wg_ip)
         TextView tv_wg_ip;
+        @BindView(R.id.tv_wg_mac)
+        TextView tv_wg_mac;
+        @BindView(R.id.tv_wg_swj_ip)
+        TextView tv_wg_swj_ip;
+        @BindView(R.id.tv_wg_wl_zwym)
+        TextView tv_wg_wl_zwym;
+        @BindView(R.id.tv_wg_swj_port)
+        TextView tv_wg_swj_port;
+        @BindView(R.id.tv_wg_wl_wgip)
+        TextView tv_wg_wl_wgip;
         @BindView(R.id.tv_status)
         TextView tv_status;
 
@@ -86,10 +104,14 @@ public class WgAdapter extends RecyclerView.Adapter<WgAdapter.WgViewHolder> {
             item = wgData;
         }
 
-        @OnClick(R.id.tv_wg_ip)
-        public void tv_wg_ip() {
+        @OnClick(R.id.wg_layout_1)
+        public void wg_layout_1() {
             mCallBack.onClickWgItem(item);
         }
 
+        @OnClick(R.id.wg_seting)
+        public void wg_seting() {
+            mCallBack.onClickWgSetingItem(item);
+        }
     }
 }

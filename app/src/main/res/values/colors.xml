@@ -13,12 +13,17 @@
 
     <color name="et_bg_color_1">#ff3367d6</color>
 
+    <color name="btn_bg_color_1">#ff3367d6</color>
+
     <color name="switch_bg_1">#ff4FB306</color>
     <color name="switch_bg_2">#FFF3F8EE</color>
     <color name="switch_nei_1">#FF60EECB</color>
     <color name="switch_nei_2">#FF8B8F87</color>
 
-
+    <color name="dialog_btn_ok_1">#13BF44</color>
+    <color name="dialog_btn_ok_2">#22f033</color>
+    <color name="dialog_btn_no_1">#A1A39E</color>
+    <color name="dialog_btn_no_2">#636660</color>
 
     <color name="btn_1">#ff2a56c6</color>
     <color name="btn_2">#ff1A73E8</color>
