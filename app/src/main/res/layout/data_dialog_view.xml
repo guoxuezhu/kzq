@@ -17,7 +17,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:orientation="horizontal">
@@ -33,20 +33,14 @@
 
         <EditText
             android:id="@+id/et_wg_name"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:background="@drawable/et_bg_1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16" />
+            style="@style/Edit_Text_1"
+            android:text="" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:orientation="horizontal">
@@ -62,20 +56,14 @@
 
         <EditText
             android:id="@+id/et_wg_ip"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:background="@drawable/et_bg_1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="192.168.0.127"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16" />
+            style="@style/Edit_Text_1"
+            android:text="" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:orientation="horizontal">
@@ -91,20 +79,14 @@
 
         <EditText
             android:id="@+id/et_wg_zwym"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:background="@drawable/et_bg_1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="192.168.0.127"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16" />
+            style="@style/Edit_Text_1"
+            android:text="" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:orientation="horizontal">
@@ -120,20 +102,14 @@
 
         <EditText
             android:id="@+id/et_wg_wl_wg"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:background="@drawable/et_bg_1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="192.168.0.127"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16" />
+            style="@style/Edit_Text_1"
+            android:text="" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:orientation="horizontal">
@@ -149,20 +125,14 @@
 
         <EditText
             android:id="@+id/et_wg_mac"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:background="@drawable/et_bg_1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="192.168.0.127"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16" />
+            style="@style/Edit_Text_1"
+            android:text="" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:orientation="horizontal">
@@ -178,20 +148,14 @@
 
         <EditText
             android:id="@+id/et_wg_swj_ip"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:background="@drawable/et_bg_1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="192.168.0.127"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16" />
+            style="@style/Edit_Text_1"
+            android:text="" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:orientation="horizontal">
@@ -207,15 +171,8 @@
 
         <EditText
             android:id="@+id/et_wg_swj_port"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:background="@drawable/et_bg_1"
-            android:gravity="center_vertical"
-            android:inputType="number"
-            android:paddingLeft="@dimen/dp_10"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16" />
+            style="@style/Edit_Text_1"
+            android:text="" />
 
     </LinearLayout>
 

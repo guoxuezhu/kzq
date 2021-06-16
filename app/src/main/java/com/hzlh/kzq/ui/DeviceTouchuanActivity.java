@@ -39,7 +39,7 @@ public class DeviceTouchuanActivity extends BaseActivity {
         if (value_1.equals("1")) {
             rbtn_kzq_tc_open.setChecked(true);
         } else {
-            rbtn_kzq_tc_close.setChecked(false);
+            rbtn_kzq_tc_close.setChecked(true);
         }
     }
 

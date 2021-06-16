@@ -71,7 +71,7 @@ public class DeviceInfoActivity extends BaseActivity {
         if (value_1.equals("1")) {
             rbtn_kzq_open.setChecked(true);
         } else {
-            rbtn_kzq_close.setChecked(false);
+            rbtn_kzq_close.setChecked(true);
         }
         tv_dianya.setText(value_2);
         tv_dianliu.setText(value_3);
