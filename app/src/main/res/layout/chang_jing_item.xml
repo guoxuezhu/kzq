@@ -33,9 +33,12 @@
 
             <Button
                 android:id="@+id/cj_dy_btn"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:text="调用" />
+                android:background="@drawable/btn_style"
+                android:text="调用"
+                android:textColor="@color/white" />
+
         </LinearLayout>
 
         <View style="@style/xian_2" />

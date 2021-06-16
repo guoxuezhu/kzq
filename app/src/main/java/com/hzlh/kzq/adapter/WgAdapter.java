@@ -104,7 +104,7 @@ public class WgAdapter extends RecyclerView.Adapter<WgAdapter.WgViewHolder> {
             item = wgData;
         }
 
-        @OnClick(R.id.wg_layout_1)
+        @OnClick({R.id.wg_layout_1, R.id.tv_wg_swj_ip, R.id.tv_wg_wl_zwym, R.id.tv_wg_swj_port, R.id.tv_wg_wl_wgip, R.id.tv_wg_mac, R.id.tv_status})
         public void wg_layout_1() {
             mCallBack.onClickWgItem(item);
         }
