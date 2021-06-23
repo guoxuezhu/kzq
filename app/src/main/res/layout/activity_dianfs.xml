@@ -52,10 +52,10 @@
             style="@style/btn_size"
             android:background="@drawable/btn_style_1"
             android:drawableTop="@mipmap/dfs_stop"
-            android:padding="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
             android:text="停止"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_14" />
 
         <Button
             android:id="@+id/rbtn_dfs_fs_1"
@@ -63,10 +63,10 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:background="@drawable/btn_style_2"
             android:drawableTop="@mipmap/dfs_fs_img_1"
-            android:padding="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
             android:text="风速一级"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_14" />
 
     </LinearLayout>
 
@@ -82,10 +82,10 @@
             style="@style/btn_size"
             android:background="@drawable/btn_style_3"
             android:drawableTop="@mipmap/dfs_fs_img_2"
-            android:padding="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
             android:text="风速二级"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_14" />
 
         <Button
             android:id="@+id/rbtn_dfs_fs_3"
@@ -93,10 +93,10 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:background="@drawable/btn_style_4"
             android:drawableTop="@mipmap/dfs_fs_img_3"
-            android:padding="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
             android:text="风速三级"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_14" />
 
     </LinearLayout>
 

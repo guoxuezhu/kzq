@@ -44,10 +44,10 @@
             style="@style/btn_size"
             android:background="@drawable/btn_style_1"
             android:drawableTop="@drawable/device_list_img"
-            android:padding="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
             android:text="设备"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_14" />
 
         <Button
             android:id="@+id/cj_list_btn"
@@ -55,10 +55,10 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:background="@drawable/btn_style_2"
             android:drawableTop="@drawable/cj_list_img"
-            android:padding="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
             android:text="场景"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_14" />
 
     </LinearLayout>
 
@@ -72,17 +72,17 @@
         <Button
             style="@style/btn_size"
             android:background="@drawable/btn_style_3"
-            android:padding="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_14" />
 
         <Button
             style="@style/btn_size"
             android:layout_marginLeft="@dimen/dp_20"
             android:background="@drawable/btn_style_4"
-            android:padding="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_14" />
 
     </LinearLayout>
 
